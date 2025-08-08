@@ -4,6 +4,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 
+# Install protoc for gRPC codegen on arm64
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends protobuf-compiler \
+    && rm -rf /var/lib/apt/lists/*
+ENV PROTOBUF_PROTOC=/usr/bin/protoc
+
 # Copy solution and restore
 COPY Source/ ./Source/
 COPY Source/RPSLS.sln ./Source/
