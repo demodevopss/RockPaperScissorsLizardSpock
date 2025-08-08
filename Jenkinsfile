@@ -16,7 +16,7 @@ pipeline {
       steps {
         sh 'docker version'
         sh 'docker build -t $IMAGE:latest -t $IMAGE:$BUILD_NUMBER .'
-        sh 'docker build -t $IMAGE_WEB:latest -t $IMAGE_WEB:$BUILD_NUMBER -f Source/Services/RPSLS.Game/Server/Dockerfile Source'
+        sh 'docker build -t $IMAGE_WEB:latest -t $IMAGE_WEB:$BUILD_NUMBER -f Source/Services/RPSLS.Game/Server/Dockerfile Source/Services'
       }
     }
     stage('Trivy Scan') {
