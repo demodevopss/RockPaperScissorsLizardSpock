@@ -1,7 +1,7 @@
 ## Multi-stage Dockerfile for RPSLS.Game.Api (.NET 5)
 
 # Build stage
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
 
 # Install protoc for gRPC codegen on arm64
@@ -20,7 +20,7 @@ RUN dotnet publish ./Source/Services/RPSLS.Game.Api/RPSLS.Game.Api.csproj \
     -c Release -o /app/publish --no-restore
 
 # Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal AS runtime
 WORKDIR /app
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
