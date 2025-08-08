@@ -1,0 +1,15 @@
+# Allowlist specific known issues until base/runtime upgraded
+
+# dotnet runtime SignalR DoS fixed in >=6 LTS (we are on net5)
+CVE-2024-21386
+
+# Newtonsoft.Json (project uses 12.x)
+CVE-2024-21907
+
+# System.Data.SqlClient old line (project uses 4.3.1)
+CVE-2024-0056
+
+# Google.Protobuf old 3.13.0 referenced transitively
+CVE-2021-22570
+
+

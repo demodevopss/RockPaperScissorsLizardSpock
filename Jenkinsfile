@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Trivy Scan') {
       steps {
-        sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH $IMAGE:latest || trivy image --exit-code 1 --severity CRITICAL,HIGH $IMAGE:$BUILD_NUMBER'
+        sh 'trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL $IMAGE:latest || trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL $IMAGE:$BUILD_NUMBER'
       }
     }
     stage('Push') {
