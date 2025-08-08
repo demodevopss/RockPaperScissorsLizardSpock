@@ -16,7 +16,8 @@ RUN dotnet publish ./Source/Services/RPSLS.Game.Api/RPSLS.Game.Api.csproj \
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal AS runtime
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://+:8080
+ENV PORT=8080 \
+    ASPNETCORE_URLS=http://0.0.0.0:8080
 EXPOSE 8080
 COPY --from=build /app/publish ./
 ENTRYPOINT ["dotnet", "RPSLS.Game.Api.dll"]
