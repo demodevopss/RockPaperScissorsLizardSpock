@@ -54,9 +54,11 @@ namespace RPSLS.Game.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI();
             }
+
+            // Enable Swagger UI in all environments
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseRouting();
             app.UseAuthorization();
