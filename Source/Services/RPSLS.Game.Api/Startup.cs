@@ -30,6 +30,7 @@ namespace RPSLS.Game.Api
             services.AddSingleton<IMatchesCacheService, MatchesCacheService>();
             services.AddApplicationInsightsTelemetry();
             services.AddControllers();
+            services.AddSwaggerGen();
             services.AddHealthChecks();
             services.AddScoped<IMatchesRepository>(sp => new MatchesRepository(
                 Configuration["cosmos-constr"],
@@ -53,6 +54,8 @@ namespace RPSLS.Game.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseRouting();
@@ -65,6 +68,10 @@ namespace RPSLS.Game.Api
                 endpoints.MapGrpcService<MultiplayerGameManagerService>();
                 endpoints.MapGrpcService<ConfigurationManagerService>();
                 endpoints.MapControllers();
+                endpoints.MapGet("/", async context =>
+                {
+                    context.Response.Redirect("/swagger");
+                });
             });
         }
     }
