@@ -1,5 +1,5 @@
-ARG sdkTag=5.0
-ARG runtimeTag=5.0
+ARG sdkTag=5.0-focal
+ARG runtimeTag=5.0-focal
 ARG image=mcr.microsoft.com/dotnet/aspnet
 ARG sdkImage=mcr.microsoft.com/dotnet/sdk
 
@@ -9,6 +9,7 @@ EXPOSE 80
 
 FROM ${sdkImage}:${sdkTag} AS build
 WORKDIR /src/project
+RUN apt-get update && apt-get install -y --no-install-recommends protobuf-compiler && rm -rf /var/lib/apt/lists/*
 COPY ["./RPSLS.Game/Server/RPSLS.Game.Server.csproj", "RPSLS.Game/Server/"]
 COPY ["./RPSLS.Game/Client/RPSLS.Game.Client.csproj", "RPSLS.Game/Client/"]
 COPY ["./RPSLS.Game/Shared/RPSLS.Game.Shared.csproj", "RPSLS.Game/Shared/"]
