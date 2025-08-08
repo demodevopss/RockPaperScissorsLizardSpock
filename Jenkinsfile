@@ -46,17 +46,17 @@ spec:
   selector:
     matchLabels:
       app: rpsls
-  template:
-    metadata:
-      labels:
-        app: rpsls
+      template:
+        metadata:
+          labels:
+            app: rpsls
         spec:
           containers:
-          - name: rpsls
-            image: "$IMAGE:$BUILD_NUMBER"
-            imagePullPolicy: Always
-            ports:
-            - containerPort: 8080
+            - name: rpsls
+              image: "$IMAGE:$BUILD_NUMBER"
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
