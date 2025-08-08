@@ -35,6 +35,9 @@ pipeline {
         sh '''
 set -e
 kubectl create namespace rpsls --dry-run=client -o yaml | kubectl apply -f - || true
+# Clean up broken last-applied annotation or old deployment to avoid patch errors
+kubectl -n rpsls annotate deploy/rpsls kubectl.kubernetes.io/last-applied-configuration- || true
+kubectl -n rpsls delete deploy rpsls --ignore-not-found=true || true
 cat <<YAML | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
