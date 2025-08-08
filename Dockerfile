@@ -10,7 +10,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 ENV PROTOBUF_PROTOC=/usr/bin/protoc
 ENV PROTOBUF_TOOLS_OS=linux \
-    PROTOBUF_TOOLS_CPU=x64
+    PROTOBUF_TOOLS_CPU=arm64
 
 # Copy solution and restore
 COPY Source/ ./Source/
