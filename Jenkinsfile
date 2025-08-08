@@ -50,12 +50,13 @@ spec:
     metadata:
       labels:
         app: rpsls
-    spec:
-      containers:
-      - name: rpsls
-        image: $IMAGE:latest
-        ports:
-        - containerPort: 8080
+            spec:
+              containers:
+              - name: rpsls
+                image: "$IMAGE:$BUILD_NUMBER"
+                imagePullPolicy: Always
+                ports:
+                - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
