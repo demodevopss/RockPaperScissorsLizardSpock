@@ -39,8 +39,8 @@ docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g s
       }
       post {
         always {
-          junit allowEmptyResults: true, testResults: 'reports/ui/smoke.xml'
-          archiveArtifacts artifacts: 'reports/ui/smoke.xml', allowEmptyArchive: true
+          junit allowEmptyResults: true, testResults: 'reports/ui/*.xml'
+          archiveArtifacts artifacts: 'reports/ui/*.xml', allowEmptyArchive: true
           sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true'
         }
       }
@@ -165,8 +165,8 @@ docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g s
       }
       post {
         always {
-          junit allowEmptyResults: true, testResults: 'reports/ui/regression.xml'
-          archiveArtifacts artifacts: 'reports/ui/regression.xml', allowEmptyArchive: true
+          junit allowEmptyResults: true, testResults: 'reports/ui/*.xml'
+          archiveArtifacts artifacts: 'reports/ui/*.xml', allowEmptyArchive: true
           sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true'
         }
       }
