@@ -53,6 +53,10 @@ def test_play_with_bot_button(driver):
     play_bot = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Play with a bot')]")))
     play_bot.click()
     WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
+    # Challenger kartları görünmeli
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".lang-card"))
+    )
 
 
 @pytest.mark.smoke
