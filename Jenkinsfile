@@ -102,6 +102,7 @@ spec:
   - name: grpc
     port: 8081
     targetPort: 8081
+    nodePort: 30082
 ---
 apiVersion: apps/v1
 kind: Deployment
