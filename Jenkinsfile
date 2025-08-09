@@ -47,7 +47,7 @@ docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hu
     }
 
     stage('UI Tests (Regression)') {
-      when { expression { return env.DEPLOYED == 'true' } }
+      when { expression { return env.DEPLOYED?.trim() == 'true' } }
       steps {
         sh '''
 set -e

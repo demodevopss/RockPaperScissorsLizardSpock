@@ -24,12 +24,17 @@ def driver():
         yield drv
 
 
+import pytest
+
+
+@pytest.mark.smoke
 def test_homepage_loads(driver):
     driver.get(WEB_URL)
     WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "app")))
     assert "Rock" in driver.title or "Spock" in driver.title
 
 
+@pytest.mark.smoke
 def test_swagger_redirects(driver):
     # Validate API is also reachable via NodePort 30080
     api_url = os.getenv("API_URL", "http://192.168.64.153:30080")
@@ -37,6 +42,7 @@ def test_swagger_redirects(driver):
     WebDriverWait(driver, 15).until(lambda d: "/swagger" in urllib.parse.urlparse(d.current_url).path)
 
 
+@pytest.mark.smoke
 def test_play_with_bot_button(driver):
     driver.get(WEB_URL)
     # Enter username
@@ -49,6 +55,7 @@ def test_play_with_bot_button(driver):
     WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
 
 
+@pytest.mark.smoke
 def test_play_with_friend_button_if_enabled(driver):
     driver.get(WEB_URL)
     # Enter username
