@@ -103,7 +103,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: GameManager__Url
-              value: http://rpsls.rpsls.svc.cluster.local
+              value: http://rpsls.rpsls.svc.cluster.local:8080
             - name: GameManager__Grpc__GrpcOverHttp
               value: "true"
           ports:
@@ -118,10 +118,11 @@ spec:
   type: NodePort
   selector:
     app: rpsls-web
-  ports:
-    - port: 80
-      targetPort: 80
-      nodePort: 30081
+   ports:
+     - name: http
+       port: 80
+       targetPort: 80
+       nodePort: 30081
 YAML
 '''
       }
