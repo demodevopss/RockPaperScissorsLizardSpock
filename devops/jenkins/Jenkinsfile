@@ -348,14 +348,8 @@ echo "All reports saved to: reports/"
       }
       post {
         always {
-          publishHTML([
-            allowMissing: true,
-            alwaysLinkToLastBuild: true,
-            keepAll: true,
-            reportDir: 'reports',
-            reportFiles: 'unified-test-report-*.html',
-            reportName: 'Unified Test Report'
-          ])
+          archiveArtifacts artifacts: 'reports/**/*', allowEmptyArchive: true
+          echo '📊 All test reports archived in Jenkins artifacts'
         }
       }
     }
