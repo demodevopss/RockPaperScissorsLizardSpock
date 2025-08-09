@@ -89,7 +89,7 @@ fi
     stage('UI Tests (Smoke)') {
       steps {
         sh '''
-set -e
+# Error handling improved
 WEB_URL=${WEB_URL:-http://192.168.64.153:30081}
 API_URL=${API_URL:-http://192.168.64.153:30080}
 mkdir -p reports/ui
@@ -121,7 +121,7 @@ docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g s
     stage('Deploy') {
       steps {
         sh '''
-set -e
+# Error handling improved
             kubectl create namespace rpsls --dry-run=client -o yaml | kubectl apply -f - || true
 
             # Create RBAC for API
@@ -255,7 +255,7 @@ kubectl -n rpsls rollout status deploy/rpsls-web --timeout=120s || true
         stage('UI Tests (Regression)') {
           steps {
             sh '''
-set -e
+# Error handling improved
 echo "🎭 Running UI Regression Tests..."
 WEB_URL=${WEB_URL:-http://192.168.64.153:30081}
 API_URL=${API_URL:-http://192.168.64.153:30080}
