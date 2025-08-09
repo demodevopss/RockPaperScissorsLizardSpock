@@ -10,6 +10,7 @@ EXPOSE 80
 FROM ${sdkImage}:${sdkTag} AS build
 WORKDIR /src/project
 RUN apt-get update && apt-get install -y --no-install-recommends protobuf-compiler && rm -rf /var/lib/apt/lists/*
+ENV PROTOBUF_TOOLS_OS=linux PROTOBUF_TOOLS_CPU=arm64 PROTOBUF_PROTOC=/usr/bin/protoc
 COPY ["./RPSLS.Game/Server/RPSLS.Game.Server.csproj", "RPSLS.Game/Server/"]
 COPY ["./RPSLS.Game/Client/RPSLS.Game.Client.csproj", "RPSLS.Game/Client/"]
 COPY ["./RPSLS.Game/Shared/RPSLS.Game.Shared.csproj", "RPSLS.Game/Shared/"]
