@@ -1,0 +1,39 @@
+{
+  "name": "rpsls-test-suite",
+  "version": "1.0.0",
+  "description": "Comprehensive test suite for Rock Paper Scissors Lizard Spock application",
+  "scripts": {
+    "test:api:grpc": "jest tests/api/grpc/",
+    "test:api:rest": "newman run tests/api/rest/challengers.postman.json",
+    "test:performance:api": "k6 run tests/performance/load/api-load-test.js",
+    "test:performance:web": "k6 run tests/performance/load/web-load-test.js",
+    "test:security": "python3 tests/security/owasp/zap-baseline.py",
+    "test:infrastructure": "bash tests/infrastructure/docker/container-health.sh",
+    "test:cross-browser": "pytest tests/cross-platform/browsers/multi-browser-test.py -m cross_browser",
+    "test:ui:smoke": "pytest tests/ui/test_smoke.py -m smoke",
+    "test:ui:regression": "pytest tests/ui/test_regression.py -m regression",
+    "test:ui:full": "pytest tests/ui/test_full_flow.py",
+    "test:all": "npm run test:ui:smoke && npm run test:api:rest && npm run test:performance:api",
+    "test:ci": "npm run test:ui:smoke && npm run test:api:rest",
+    "reports:generate": "node scripts/generate-reports.js",
+    "reports:serve": "python3 -m http.server 8000 --directory reports"
+  },
+  "devDependencies": {
+    "@grpc/grpc-js": "^1.9.0",
+    "@grpc/proto-loader": "^0.7.8",
+    "jest": "^29.6.0",
+    "newman": "^5.3.2",
+    "k6": "^0.45.0"
+  },
+  "keywords": [
+    "testing",
+    "selenium",
+    "grpc",
+    "k6",
+    "security",
+    "performance",
+    "cross-browser"
+  ],
+  "author": "DevOps Team",
+  "license": "MIT"
+}
