@@ -39,7 +39,7 @@ fi
       }
       post {
         always {
-          publishTestResults testResultsPattern: 'reports/unit/*.trx', allowEmptyResults: true
+          archiveArtifacts artifacts: 'reports/unit/*', allowEmptyArchive: true
         }
       }
     }
