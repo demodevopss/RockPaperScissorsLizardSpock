@@ -58,16 +58,27 @@ def test_play_with_bot_button(driver):
 @pytest.mark.smoke
 def test_play_with_friend_button_if_enabled(driver):
     driver.get(WEB_URL)
-    # Enter username
-    user_input = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user")))
-    user_input.clear()
-    user_input.send_keys("jenkins-user")
-    # Try to click "Play with a friend" if present/enabled
+
+    # Username input may be hidden if already logged in; fill if visible
     try:
-        btn = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//button[contains(., 'Play with a friend')]")))
+        user_input = WebDriverWait(driver, 5).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user"))
+        )
+        user_input.clear()
+        user_input.send_keys("jenkins-user")
+    except Exception:
+        pass
+
+    # Try to click "Play with a friend" if present/enabled, otherwise skip
+    try:
+        btn = WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, "//button[contains(., 'Play with a friend')]"))
+        )
         if btn.is_enabled():
             btn.click()
-            WebDriverWait(driver, 30).until(lambda d: "/lobby" in urllib.parse.urlparse(d.current_url).path)
+            WebDriverWait(driver, 30).until(
+                lambda d: "/lobby" in urllib.parse.urlparse(d.current_url).path
+            )
         else:
             pytest.skip("Multiplayer button disabled by settings")
     except Exception:
