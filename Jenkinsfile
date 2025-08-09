@@ -24,7 +24,7 @@ pipeline {
         sh 'trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL $IMAGE:latest || trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL $IMAGE:$BUILD_NUMBER'
       }
     }
-    stage('UI Tests') {
+    stage('UI Tests (Smoke)') {
       steps {
         sh '''
 set -e
@@ -33,12 +33,28 @@ API_URL=${API_URL:-http://192.168.64.153:30080}
 docker network create rpsls-tests >/dev/null 2>&1 || true
 docker rm -f selenium >/dev/null 2>&1 || true
 docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chromium:121.0 || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
-docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":"$PWD" -w "$PWD" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q tests/ui" | cat
+docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":"$PWD" -w "$PWD" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m smoke tests/ui" | cat
 '''
       }
       post {
         always { sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true' }
       }
+    }
+
+    stage('UI Tests (Regression)') {
+      when { expression { return env.DEPLOYED == 'true' } }
+      steps {
+        sh '''
+set -e
+WEB_URL=${WEB_URL:-http://192.168.64.153:30081}
+API_URL=${API_URL:-http://192.168.64.153:30080}
+docker network create rpsls-tests >/dev/null 2>&1 || true
+docker rm -f selenium >/dev/null 2>&1 || true
+docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chromium:121.0 || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
+docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":"$PWD" -w "$PWD" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m regression tests/ui" | cat
+'''
+      }
+      post { always { sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true' } }
     }
     stage('Push') {
       steps {
@@ -139,6 +155,7 @@ YAML
 kubectl -n rpsls rollout status deploy/rpsls --timeout=120s || true
 kubectl -n rpsls rollout status deploy/rpsls-web --timeout=120s || true
 '''
+        env.DEPLOYED = 'true'
       }
     }
   }
