@@ -280,7 +280,7 @@ mkdir -p reports/cross-platform
 docker network create rpsls-tests >/dev/null 2>&1 || true
 docker rm -f selenium >/dev/null 2>&1 || true
 docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
-docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=http://192.168.64.153:30081 -w "$WORKSPACE" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium pytest-html && pytest -q tests/cross-platform/browsers/multi-browser-test.py -m cross_browser --junitxml=reports/cross-platform/cross-browser.xml --html=reports/cross-platform/browser-test-report.html --self-contained-html || echo 'Cross-browser tests failed'" | cat
+docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=http://192.168.64.153:30081 -w "$WORKSPACE" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q tests/cross-platform/browsers/multi-browser-test.py -m cross_browser --junitxml=reports/cross-platform/cross-browser.xml || echo 'Cross-browser tests failed'" | cat
 '''
           }
           post {
