@@ -27,7 +27,11 @@ namespace RPSLS.Game.Api.Services
             var picks = new[] { 0, 1, 2, 3, 4 }; // Rock, Paper, Scissors, Lizard, Spock
             var randomPick = picks[random.Next(picks.Length)];
             
-            return new PickDto { Value = randomPick };
+            return new PickDto 
+            { 
+                Value = randomPick,
+                Text = PickDto.ToText(randomPick)
+            };
         }
 
         private void PropagateContext(HttpClient client, IDictionary<string, string> context)
