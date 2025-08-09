@@ -167,7 +167,7 @@ YAML
 kubectl -n rpsls rollout status deploy/rpsls --timeout=120s || true
 kubectl -n rpsls rollout status deploy/rpsls-web --timeout=120s || true
 '''
-        env.DEPLOYED = 'true'
+        script { env.DEPLOYED = 'true' }
       }
     }
   }
