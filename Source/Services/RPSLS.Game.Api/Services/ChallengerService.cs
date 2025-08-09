@@ -62,7 +62,7 @@ namespace RPSLS.Game.Api.Services
                     : KubernetesClientConfiguration.InClusterConfig();
 
                 var client = new Kubernetes(config);
-                return client.ListNamespacedService("default");
+                return client.ListNamespacedService("rpsls");
             }
             catch (KubeConfigException ex)
             {
