@@ -28,30 +28,16 @@ pipeline {
       steps {
         sh '''
 set -e
-if docker compose version >/dev/null 2>&1; then
-  DCMD="docker compose"
-elif command -v docker-compose >/dev/null 2>&1; then
-  DCMD="docker-compose"
-else
-  DCMD="docker run --rm -v \"$PWD\":\"$PWD\" -w \"$PWD\" -v /var/run/docker.sock:/var/run/docker.sock docker/compose:1.29.2"
-fi
-$DCMD -f docker-compose.tests.yml up --abort-on-container-exit --exit-code-from tests | cat
+WEB_URL=${WEB_URL:-http://192.168.64.153:30081}
+API_URL=${API_URL:-http://192.168.64.153:30080}
+docker network create rpsls-tests >/dev/null 2>&1 || true
+docker rm -f selenium >/dev/null 2>&1 || true
+docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chromium:121.0 || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
+docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":"$PWD" -w "$PWD" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q tests/ui" | cat
 '''
       }
       post {
-        always {
-          sh '''
-set +e
-if docker compose version >/dev/null 2>&1; then
-  DCMD="docker compose"
-elif command -v docker-compose >/dev/null 2>&1; then
-  DCMD="docker-compose"
-else
-  DCMD="docker run --rm -v \"$PWD\":\"$PWD\" -w \"$PWD\" -v /var/run/docker.sock:/var/run/docker.sock docker/compose:1.29.2"
-fi
-$DCMD -f docker-compose.tests.yml down -v || true
-'''
-        }
+        always { sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true' }
       }
     }
     stage('Push') {
