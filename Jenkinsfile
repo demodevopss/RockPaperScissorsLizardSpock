@@ -34,7 +34,7 @@ mkdir -p reports/ui
 docker network create rpsls-tests >/dev/null 2>&1 || true
 docker rm -f selenium >/dev/null 2>&1 || true
 docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
-docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":/work -w /work python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m smoke --junitxml=reports/ui/smoke.xml tests/ui || pytest -q -m smoke --junitxml=reports/ui/smoke.xml" | cat
+ docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -w "$WORKSPACE" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m smoke --junitxml=reports/ui/smoke.xml tests/ui || pytest -q -m smoke --junitxml=reports/ui/smoke.xml"
 '''
       }
       post {
@@ -160,7 +160,7 @@ mkdir -p reports/ui
 docker network create rpsls-tests >/dev/null 2>&1 || true
 docker rm -f selenium >/dev/null 2>&1 || true
 docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
-docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":/work -w /work python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m regression --junitxml=reports/ui/regression.xml tests/ui || pytest -q -m regression --junitxml=reports/ui/regression.xml" | cat
+ docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -w "$WORKSPACE" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m regression --junitxml=reports/ui/regression.xml tests/ui || pytest -q -m regression --junitxml=reports/ui/regression.xml"
 '''
       }
       post {
