@@ -50,7 +50,7 @@ def test_full_buttons_flow(driver):
     wait_and_type(driver, "input.user", "serdar")
     click_text(driver, "Play with a bot")
     WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
-    WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".lang-card")))
+    WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//button[contains(text(), 'SELECT')]")))
 
     # On challenger page, click one language card and Select
     WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".lang-card"))).click()
