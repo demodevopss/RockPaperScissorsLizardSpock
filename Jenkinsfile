@@ -38,9 +38,7 @@ pipeline {
         sh '''
 set -e
 kubectl create namespace rpsls --dry-run=client -o yaml | kubectl apply -f - || true
-# Clean up broken last-applied annotation or old deployment to avoid patch errors
-kubectl -n rpsls annotate deploy/rpsls kubectl.kubernetes.io/last-applied-configuration- || true
-kubectl -n rpsls delete deploy rpsls --ignore-not-found=true || true
+
 cat <<YAML | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
@@ -58,11 +56,11 @@ spec:
         app: rpsls
     spec:
       containers:
-        - name: rpsls
-          image: "$IMAGE:$BUILD_NUMBER"
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 8080
+      - name: rpsls
+        image: "$IMAGE:$BUILD_NUMBER"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -74,14 +72,11 @@ spec:
   selector:
     app: rpsls
   ports:
-  - port: 80
+  - name: http
+    port: 80
     targetPort: 8080
     nodePort: 30080
-YAML
-kubectl rollout status deploy/rpsls -n rpsls --timeout=120s || true
-
-# Web (Blazor Server) deploy
-cat <<YAML | kubectl apply -f -
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -98,16 +93,16 @@ spec:
         app: rpsls-web
     spec:
       containers:
-        - name: rpsls-web
-          image: "$IMAGE_WEB:$BUILD_NUMBER"
-          imagePullPolicy: Always
-          env:
-            - name: GameManager__Url
-              value: http://rpsls.rpsls.svc.cluster.local:8080
-            - name: GameManager__Grpc__GrpcOverHttp
-              value: "true"
-          ports:
-            - containerPort: 80
+      - name: rpsls-web
+        image: "$IMAGE_WEB:$BUILD_NUMBER"
+        imagePullPolicy: Always
+        env:
+        - name: GameManager__Url
+          value: "http://rpsls.rpsls.svc.cluster.local:8080"
+        - name: GameManager__Grpc__GrpcOverHttp
+          value: "true"
+        ports:
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -118,12 +113,15 @@ spec:
   type: NodePort
   selector:
     app: rpsls-web
-   ports:
-     - name: http
-       port: 80
-       targetPort: 80
-       nodePort: 30081
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30081
 YAML
+
+kubectl -n rpsls rollout status deploy/rpsls --timeout=120s || true
+kubectl -n rpsls rollout status deploy/rpsls-web --timeout=120s || true
 '''
       }
     }
