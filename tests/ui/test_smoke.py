@@ -48,7 +48,7 @@ def test_play_with_bot_button(driver):
     # Enter username
     user_input = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user")))
     user_input.clear()
-    user_input.send_keys("jenkins-user")
+    user_input.send_keys("serdar")
     # Click "Play with a bot"
     play_bot = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Play with a bot')]")))
     play_bot.click()
@@ -65,7 +65,7 @@ def test_play_with_friend_button_if_enabled(driver):
             EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user"))
         )
         user_input.clear()
-        user_input.send_keys("jenkins-user")
+        user_input.send_keys("serdar")
     except Exception:
         pass
 

@@ -47,7 +47,7 @@ def test_full_buttons_flow(driver):
         pass
 
     # Fill username and click both main buttons
-    wait_and_type(driver, "input.user", "jenkins-user")
+    wait_and_type(driver, "input.user", "serdar")
     click_text(driver, "Play with a bot")
     WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
 
@@ -67,7 +67,7 @@ def test_full_buttons_flow(driver):
 
     # Back to home and try Play with a friend if enabled
     driver.get(WEB_URL)
-    wait_and_type(driver, "input.user", "jenkins-user")
+    wait_and_type(driver, "input.user", "serdar")
     try:
         click_text(driver, "Play with a friend")
         WebDriverWait(driver, 30).until(lambda d: "/lobby" in urllib.parse.urlparse(d.current_url).path)
