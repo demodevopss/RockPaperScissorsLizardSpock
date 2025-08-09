@@ -1,0 +1,628 @@
+Started by user Serdar Selçuk
+Obtained Jenkinsfile from git https://github.com/demodevopss/RockPaperScissorsLizardSpock.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/rpsls-pipeline@2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential github-https
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/rpsls-pipeline@2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/demodevopss/RockPaperScissorsLizardSpock.git # timeout=10
+Fetching upstream changes from https://github.com/demodevopss/RockPaperScissorsLizardSpock.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials github-https
+ > git fetch --tags --force --progress -- https://github.com/demodevopss/RockPaperScissorsLizardSpock.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 19d063d2b2e0f97265ac6962ae227f81994999cf (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 19d063d2b2e0f97265ac6962ae227f81994999cf # timeout=10
+Commit message: "Fix UI test selectors - use SELECT button instead of .lang-card"
+ > git rev-list --no-walk 19d063d2b2e0f97265ac6962ae227f81994999cf # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+[2025-08-09T12:19:34.458Z] The recommended git tool is: git
+[2025-08-09T12:19:34.458Z] No credentials specified
+[2025-08-09T12:19:34.458Z]  > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/rpsls-pipeline@2/.git # timeout=10
+[2025-08-09T12:19:34.464Z] Fetching changes from the remote Git repository
+[2025-08-09T12:19:34.464Z]  > git config remote.origin.url https://github.com/demodevopss/RockPaperScissorsLizardSpock.git # timeout=10
+[2025-08-09T12:19:34.466Z] Fetching upstream changes from https://github.com/demodevopss/RockPaperScissorsLizardSpock.git
+[2025-08-09T12:19:34.466Z]  > git --version # timeout=10
+[2025-08-09T12:19:34.467Z]  > git --version # 'git version 2.39.5'
+[2025-08-09T12:19:34.467Z]  > git fetch --tags --force --progress -- https://github.com/demodevopss/RockPaperScissorsLizardSpock.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2025-08-09T12:19:34.897Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2025-08-09T12:19:34.899Z] Checking out Revision 19d063d2b2e0f97265ac6962ae227f81994999cf (refs/remotes/origin/main)
+[2025-08-09T12:19:34.899Z]  > git config core.sparsecheckout # timeout=10
+[2025-08-09T12:19:34.900Z]  > git checkout -f 19d063d2b2e0f97265ac6962ae227f81994999cf # timeout=10
+[2025-08-09T12:19:34.906Z] Commit message: "Fix UI test selectors - use SELECT button instead of .lang-card"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Build)
+[Pipeline] sh
+[2025-08-09T12:19:35.214Z] + docker version
+[2025-08-09T12:19:35.214Z] Client:
+[2025-08-09T12:19:35.214Z]  Version:           20.10.24+dfsg1
+[2025-08-09T12:19:35.214Z]  API version:       1.41
+[2025-08-09T12:19:35.214Z]  Go version:        go1.19.8
+[2025-08-09T12:19:35.214Z]  Git commit:        297e128
+[2025-08-09T12:19:35.214Z]  Built:             Fri Apr 18 15:03:29 2025
+[2025-08-09T12:19:35.214Z]  OS/Arch:           linux/arm64
+[2025-08-09T12:19:35.214Z]  Context:           default
+[2025-08-09T12:19:35.214Z]  Experimental:      true
+[2025-08-09T12:19:35.214Z] 
+[2025-08-09T12:19:35.214Z] Server: Docker Engine - Community
+[2025-08-09T12:19:35.214Z]  Engine:
+[2025-08-09T12:19:35.214Z]   Version:          28.3.3
+[2025-08-09T12:19:35.214Z]   API version:      1.51 (minimum version 1.24)
+[2025-08-09T12:19:35.214Z]   Go version:       go1.24.5
+[2025-08-09T12:19:35.214Z]   Git commit:       bea959c
+[2025-08-09T12:19:35.214Z]   Built:            Fri Jul 25 11:35:23 2025
+[2025-08-09T12:19:35.214Z]   OS/Arch:          linux/arm64
+[2025-08-09T12:19:35.214Z]   Experimental:     false
+[2025-08-09T12:19:35.214Z]  containerd:
+[2025-08-09T12:19:35.214Z]   Version:          1.7.27
+[2025-08-09T12:19:35.214Z]   GitCommit:        05044ec0a9a75232cad458027ca83437aae3f4da
+[2025-08-09T12:19:35.214Z]  runc:
+[2025-08-09T12:19:35.214Z]   Version:          1.2.5
+[2025-08-09T12:19:35.214Z]   GitCommit:        v1.2.5-0-g59923ef
+[2025-08-09T12:19:35.214Z]  docker-init:
+[2025-08-09T12:19:35.214Z]   Version:          0.19.0
+[2025-08-09T12:19:35.214Z]   GitCommit:        de40ad0
+[Pipeline] sh
+[2025-08-09T12:19:35.485Z] + docker build -t devopsserdar/rpsls:latest -t devopsserdar/rpsls:56 .
+[2025-08-09T12:19:35.485Z] #1 [internal] load build definition from Dockerfile
+[2025-08-09T12:19:35.485Z] #1 sha256:605c7bb23fba7ff8daa17e64611a5698834294ca9ae4f7ac6b125da78fbcebd6
+[2025-08-09T12:19:35.485Z] #1 transferring dockerfile: 741B done
+[2025-08-09T12:19:35.485Z] #1 DONE 0.0s
+[2025-08-09T12:19:35.485Z] 
+[2025-08-09T12:19:35.485Z] #3 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0-focal
+[2025-08-09T12:19:35.485Z] #3 sha256:36c7f9f43c6afda9cc3d33fd7dc601cb800206ed26b9c00204532473765f629d
+[2025-08-09T12:19:35.735Z] #3 ...
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #2 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:5.0-focal
+[2025-08-09T12:19:35.735Z] #2 sha256:bd7d980268fa0ca85f3abe4180fa95be6c9fde8e77d1bcd2b7645247afd91cc5
+[2025-08-09T12:19:35.735Z] #2 DONE 0.2s
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #3 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0-focal
+[2025-08-09T12:19:35.735Z] #3 sha256:36c7f9f43c6afda9cc3d33fd7dc601cb800206ed26b9c00204532473765f629d
+[2025-08-09T12:19:35.735Z] #3 DONE 0.3s
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #4 [internal] load .dockerignore
+[2025-08-09T12:19:35.735Z] #4 sha256:3dd7c3c6abde81a6594d08004ca1f1e7244102f6dc3f1ce81f186804b88bccbe
+[2025-08-09T12:19:35.735Z] #4 transferring context: 2B done
+[2025-08-09T12:19:35.735Z] #4 DONE 0.0s
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #15 [build 1/7] FROM mcr.microsoft.com/dotnet/sdk:5.0-focal@sha256:c652a1f1e82c2ee8e21acc256c69d0358386abca17f308c18abf6467027786c8
+[2025-08-09T12:19:35.735Z] #15 sha256:fa15cc1e78e977e53927ea844bdd0a895b13770af1f3983aba5ed8bc6f471acf
+[2025-08-09T12:19:35.735Z] #15 DONE 0.0s
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #6 [runtime 1/3] FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal@sha256:f6e3a7fab8341c023fb091a54a53b01825c70c8784f731fecf5edfe260cd499c
+[2025-08-09T12:19:35.735Z] #6 sha256:25179a6e784a802ae31331fd08bdc745df7e6d921032f947ba4bdc021e13184a
+[2025-08-09T12:19:35.735Z] #6 DONE 0.0s
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #12 [internal] load build context
+[2025-08-09T12:19:35.735Z] #12 sha256:fb1458cc0d952801859d228df16dd4c05af886d6182e3425fcd8a0c67fcb970b
+[2025-08-09T12:19:35.735Z] #12 transferring context: 18.62MB 0.1s done
+[2025-08-09T12:19:35.735Z] #12 DONE 0.1s
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #14 [build 2/7] WORKDIR /src
+[2025-08-09T12:19:35.735Z] #14 sha256:d3f5ff393ddd5874b0e1e4fe4bd5027a4f4870e8227126dc49430ee16547292f
+[2025-08-09T12:19:35.735Z] #14 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #9 [build 6/7] RUN dotnet restore ./Source/RPSLS.sln
+[2025-08-09T12:19:35.735Z] #9 sha256:75f264fdb4bc05fb91cfa856a3ebd46151b309181a5af09b09b2d8eedaaed4e8
+[2025-08-09T12:19:35.735Z] #9 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #13 [build 3/7] RUN apt-get update     && apt-get install -y --no-install-recommends protobuf-compiler     && rm -rf /var/lib/apt/lists/*
+[2025-08-09T12:19:35.735Z] #13 sha256:394265e82f505a09cc14255671fbf950b043578b6803f54e79c2a3470cfb6d5c
+[2025-08-09T12:19:35.735Z] #13 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #10 [build 5/7] COPY Source/RPSLS.sln ./Source/
+[2025-08-09T12:19:35.735Z] #10 sha256:a0aef3b48107dd7bd8ebc6f96abef89444a096576059db69f8e8eac4e2029caa
+[2025-08-09T12:19:35.735Z] #10 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #8 [build 7/7] RUN dotnet publish ./Source/Services/RPSLS.Game.Api/RPSLS.Game.Api.csproj     -c Release -o /app/publish --no-restore
+[2025-08-09T12:19:35.735Z] #8 sha256:5e3b0e96f3b3fa32c5343edd9a7d3af5e55862b06a5bd98918b5fb0baf987ef5
+[2025-08-09T12:19:35.735Z] #8 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #11 [build 4/7] COPY Source/ ./Source/
+[2025-08-09T12:19:35.735Z] #11 sha256:46e14e2c56706293b6379edc420b00059d590c669560b9aef52bc0faedf383fc
+[2025-08-09T12:19:35.735Z] #11 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #5 [runtime 2/3] WORKDIR /app
+[2025-08-09T12:19:35.735Z] #5 sha256:ad3223e0eb67a81bb557faa026e39a4737a8c2f1b79509c0f868c60651a20101
+[2025-08-09T12:19:35.735Z] #5 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #7 [runtime 3/3] COPY --from=build /app/publish ./
+[2025-08-09T12:19:35.735Z] #7 sha256:e789b822cd496a27ed2cc0854591512bd7df6984bc5c2f3ee82505ec89c2c6a6
+[2025-08-09T12:19:35.735Z] #7 CACHED
+[2025-08-09T12:19:35.735Z] 
+[2025-08-09T12:19:35.735Z] #16 exporting to image
+[2025-08-09T12:19:35.735Z] #16 sha256:57ec5f59fcdc430f4feaef97df6779b76d71f9821257fd5e523246e768e2db94
+[2025-08-09T12:19:35.735Z] #16 exporting layers done
+[2025-08-09T12:19:35.735Z] #16 writing image sha256:18f4ca5418d6dedb45974fa9d6ceae3108648eb1f78d0bed06409029f4b30faf done
+[2025-08-09T12:19:35.735Z] #16 naming to docker.io/devopsserdar/rpsls:latest done
+[2025-08-09T12:19:35.735Z] #16 naming to docker.io/devopsserdar/rpsls:56 done
+[2025-08-09T12:19:35.735Z] #16 DONE 0.0s
+[Pipeline] sh
+[2025-08-09T12:19:36.009Z] + docker build -t devopsserdar/rpsls-web:latest -t devopsserdar/rpsls-web:56 -f Source/Services/RPSLS.Game/Server/Dockerfile Source/Services
+[2025-08-09T12:19:36.009Z] #1 [internal] load build definition from Dockerfile
+[2025-08-09T12:19:36.009Z] #1 sha256:7f1537ec225d4dc1ef6d757fefe46b6018f68c63c21ce5c4c30ad4c706ceaf76
+[2025-08-09T12:19:36.009Z] #1 transferring dockerfile: 1.11kB done
+[2025-08-09T12:19:36.009Z] #1 DONE 0.0s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #3 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0-focal
+[2025-08-09T12:19:36.009Z] #3 sha256:36c7f9f43c6afda9cc3d33fd7dc601cb800206ed26b9c00204532473765f629d
+[2025-08-09T12:19:36.009Z] #3 DONE 0.1s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #2 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:5.0-focal
+[2025-08-09T12:19:36.009Z] #2 sha256:bd7d980268fa0ca85f3abe4180fa95be6c9fde8e77d1bcd2b7645247afd91cc5
+[2025-08-09T12:19:36.009Z] #2 DONE 0.1s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #4 [internal] load .dockerignore
+[2025-08-09T12:19:36.009Z] #4 sha256:bf37ed6b9148a03fe2c820c80dcb361ec44453054b4902ca55f9676cc66b9c48
+[2025-08-09T12:19:36.009Z] #4 transferring context: 2B done
+[2025-08-09T12:19:36.009Z] #4 DONE 0.0s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #13 [build 1/9] FROM mcr.microsoft.com/dotnet/sdk:5.0-focal@sha256:c652a1f1e82c2ee8e21acc256c69d0358386abca17f308c18abf6467027786c8
+[2025-08-09T12:19:36.009Z] #13 sha256:fa15cc1e78e977e53927ea844bdd0a895b13770af1f3983aba5ed8bc6f471acf
+[2025-08-09T12:19:36.009Z] #13 DONE 0.0s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #18 [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal@sha256:f6e3a7fab8341c023fb091a54a53b01825c70c8784f731fecf5edfe260cd499c
+[2025-08-09T12:19:36.009Z] #18 sha256:25179a6e784a802ae31331fd08bdc745df7e6d921032f947ba4bdc021e13184a
+[2025-08-09T12:19:36.009Z] #18 DONE 0.0s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #19 [internal] load build context
+[2025-08-09T12:19:36.009Z] #19 sha256:01fdb886a0bb36030d5c4b4788a1a11ced583be632f59a6fdb849724ffd416eb
+[2025-08-09T12:19:36.009Z] #19 transferring context: 18.60MB 0.1s done
+[2025-08-09T12:19:36.009Z] #19 DONE 0.1s
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #9 [build 4/9] COPY [./RPSLS.Game/Server/RPSLS.Game.Server.csproj, RPSLS.Game/Server/]
+[2025-08-09T12:19:36.009Z] #9 sha256:915cc3264d666f581c6f0b02dacb72fc6c463fd4f799cf2d74d917a38b8dc200
+[2025-08-09T12:19:36.009Z] #9 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #14 [final 1/2] WORKDIR /app
+[2025-08-09T12:19:36.009Z] #14 sha256:0a8ce9661e5dbc16882fb46e6c112793dace73ad62e707def8731bc8470e991c
+[2025-08-09T12:19:36.009Z] #14 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #16 [build 9/9] RUN dotnet build "./RPSLS.Game/Server/RPSLS.Game.Server.csproj" -c Release -o /app/build
+[2025-08-09T12:19:36.009Z] #16 sha256:d3c022adedbf60445aad239d992cd799321d38229130e5624417d2731648e71e
+[2025-08-09T12:19:36.009Z] #16 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #10 [publish 1/1] RUN dotnet publish "./RPSLS.Game/Server/RPSLS.Game.Server.csproj" -c Release -o /app/publish
+[2025-08-09T12:19:36.009Z] #10 sha256:a1daf14671b2decc1bb52527c1b074ac7969c563b7e19ba9fb0c63c8d52057cf
+[2025-08-09T12:19:36.009Z] #10 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #15 [base 2/2] WORKDIR /app
+[2025-08-09T12:19:36.009Z] #15 sha256:ad3223e0eb67a81bb557faa026e39a4737a8c2f1b79509c0f868c60651a20101
+[2025-08-09T12:19:36.009Z] #15 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #6 [build 7/9] RUN dotnet restore "./RPSLS.Game/Server/RPSLS.Game.Server.csproj"
+[2025-08-09T12:19:36.009Z] #6 sha256:cdd27320fe51102298766dbcbcfd588787a53a99e3b5d6c08aa93305eb58d5ac
+[2025-08-09T12:19:36.009Z] #6 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #12 [build 2/9] WORKDIR /src/project
+[2025-08-09T12:19:36.009Z] #12 sha256:b6d29369ad181eacd9af61fb4bfe89fc4ed144e9667daa8d25e5ea8080658192
+[2025-08-09T12:19:36.009Z] #12 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #11 [build 3/9] RUN apt-get update && apt-get install -y --no-install-recommends protobuf-compiler && rm -rf /var/lib/apt/lists/*
+[2025-08-09T12:19:36.009Z] #11 sha256:f8e1b3f7ecf68812090de13cc77351cf031880d637e4d55ddb687bc07f3b337a
+[2025-08-09T12:19:36.009Z] #11 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #7 [build 6/9] COPY [./RPSLS.Game/Shared/RPSLS.Game.Shared.csproj, RPSLS.Game/Shared/]
+[2025-08-09T12:19:36.009Z] #7 sha256:612b205e861c9e8217008b0e7cc4c7fd08997e13555c451f3b97489c194931c1
+[2025-08-09T12:19:36.009Z] #7 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #8 [build 5/9] COPY [./RPSLS.Game/Client/RPSLS.Game.Client.csproj, RPSLS.Game/Client/]
+[2025-08-09T12:19:36.009Z] #8 sha256:fab5019ab554f90b60e06c16f07d4894f0b5db0a5ddd07480511925dac4f1b06
+[2025-08-09T12:19:36.009Z] #8 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #5 [build 8/9] COPY . .
+[2025-08-09T12:19:36.009Z] #5 sha256:95f68bb2da14c1a8f0d31c5cfa8d958bbbb4035884402ccd2d482d78660ab54a
+[2025-08-09T12:19:36.009Z] #5 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #17 [final 2/2] COPY --from=publish /app/publish .
+[2025-08-09T12:19:36.009Z] #17 sha256:f11475432c8ecf7b4a8d9f82b0dc125e691d52c7c98e6ecf26af0673bcb4f49b
+[2025-08-09T12:19:36.009Z] #17 CACHED
+[2025-08-09T12:19:36.009Z] 
+[2025-08-09T12:19:36.009Z] #20 exporting to image
+[2025-08-09T12:19:36.009Z] #20 sha256:ae4ce08fdadb18b0c043a0924041ad3925a290f01c7a4b16aa253f5b91bf0977
+[2025-08-09T12:19:36.009Z] #20 exporting layers done
+[2025-08-09T12:19:36.009Z] #20 writing image sha256:bee67eb3cf08ef36c68e445e8adde8ac4b9988fdccbcea09c52f666e7c18193d done
+[2025-08-09T12:19:36.009Z] #20 naming to docker.io/devopsserdar/rpsls-web:latest done
+[2025-08-09T12:19:36.009Z] #20 naming to docker.io/devopsserdar/rpsls-web:56 done
+[2025-08-09T12:19:36.009Z] #20 DONE 0.0s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Trivy Scan)
+[Pipeline] sh
+[2025-08-09T12:19:36.317Z] + trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL devopsserdar/rpsls:latest
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	[vuln] Vulnerability scanning is enabled
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	[secret] Secret scanning is enabled
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	[secret] Please see also https://trivy.dev/v0.65/docs/scanner/secret#recommendation for faster secret detection
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	Detected OS	family="ubuntu" version="20.04"
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	[ubuntu] Detecting vulnerabilities...	os_version="20.04" pkg_num=103
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	Number of language-specific files	num=3
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	[dotnet-core] Detecting vulnerabilities...
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	WARN	This OS version is no longer supported by the distribution	family="ubuntu" version="20.04"
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	WARN	The vulnerability detection may be insufficient because security updates are not provided
+[2025-08-09T12:19:36.317Z] 2025-08-09T12:19:36Z	INFO	Some vulnerabilities have been ignored/suppressed. Use the "--show-suppressed" flag to display them.
+[2025-08-09T12:19:36.317Z] 
+[2025-08-09T12:19:36.317Z] Report Summary
+[2025-08-09T12:19:36.317Z] 
+[2025-08-09T12:19:36.317Z] ┌──────────────────────────────────────────────────────────────────────────────────┬─────────────┬─────────────────┬─────────┐
+[2025-08-09T12:19:36.317Z] │                                      Target                                      │    Type     │ Vulnerabilities │ Secrets │
+[2025-08-09T12:19:36.317Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:19:36.317Z] │ devopsserdar/rpsls:latest (ubuntu 20.04)                                         │   ubuntu    │        0        │    -    │
+[2025-08-09T12:19:36.317Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:19:36.317Z] │ app/RPSLS.Game.Api.deps.json                                                     │ dotnet-core │        0        │    -    │
+[2025-08-09T12:19:36.317Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:19:36.317Z] │ usr/share/dotnet/shared/Microsoft.AspNetCore.App/5.0.17/Microsoft.AspNetCore.Ap- │ dotnet-core │        0        │    -    │
+[2025-08-09T12:19:36.317Z] │ p.deps.json                                                                      │             │                 │         │
+[2025-08-09T12:19:36.317Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:19:36.317Z] │ usr/share/dotnet/shared/Microsoft.NETCore.App/5.0.17/Microsoft.NETCore.App.deps- │ dotnet-core │        0        │    -    │
+[2025-08-09T12:19:36.317Z] │ .json                                                                            │             │                 │         │
+[2025-08-09T12:19:36.317Z] └──────────────────────────────────────────────────────────────────────────────────┴─────────────┴─────────────────┴─────────┘
+[2025-08-09T12:19:36.317Z] Legend:
+[2025-08-09T12:19:36.317Z] - '-': Not scanned
+[2025-08-09T12:19:36.317Z] - '0': Clean (no security findings detected)
+[2025-08-09T12:19:36.317Z] 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (UI Tests (Smoke))
+[Pipeline] sh
+[2025-08-09T12:19:36.614Z] + set -e
+[2025-08-09T12:19:36.614Z] + WEB_URL=http://192.168.64.153:30081
+[2025-08-09T12:19:36.614Z] + API_URL=http://192.168.64.153:30080
+[2025-08-09T12:19:36.614Z] + mkdir -p reports/ui
+[2025-08-09T12:19:36.614Z] + docker network create rpsls-tests
+[2025-08-09T12:19:36.614Z] + docker rm -f selenium
+[2025-08-09T12:19:36.614Z] + docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
+[2025-08-09T12:19:36.614Z] 6bdff0aff42a19aa7c2820beca870c7d8fc098bf4fdb4bd68c9baad8e5c3ea29
+[2025-08-09T12:19:36.614Z] + docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=http://192.168.64.153:30081 -e API_URL=http://192.168.64.153:30080 -w /var/jenkins_home/workspace/rpsls-pipeline@2 python:3.11-slim sh -lc pip install --no-cache-dir pytest selenium && pytest -q -m smoke --junitxml=reports/ui/smoke.xml tests/ui || pytest -q -m smoke --junitxml=reports/ui/smoke.xml
+[2025-08-09T12:19:37.966Z] Collecting pytest
+[2025-08-09T12:19:37.966Z]   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+[2025-08-09T12:19:38.216Z] Collecting selenium
+[2025-08-09T12:19:38.216Z]   Downloading selenium-4.34.2-py3-none-any.whl.metadata (7.5 kB)
+[2025-08-09T12:19:38.216Z] Collecting iniconfig>=1 (from pytest)
+[2025-08-09T12:19:38.216Z]   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+[2025-08-09T12:19:38.216Z] Collecting packaging>=20 (from pytest)
+[2025-08-09T12:19:38.467Z]   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+[2025-08-09T12:19:38.467Z] Collecting pluggy<2,>=1.5 (from pytest)
+[2025-08-09T12:19:38.467Z]   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+[2025-08-09T12:19:38.467Z] Collecting pygments>=2.7.2 (from pytest)
+[2025-08-09T12:19:38.717Z]   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+[2025-08-09T12:19:38.717Z] Collecting urllib3~=2.5.0 (from urllib3[socks]~=2.5.0->selenium)
+[2025-08-09T12:19:38.717Z]   Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+[2025-08-09T12:19:38.717Z] Collecting trio~=0.30.0 (from selenium)
+[2025-08-09T12:19:38.976Z]   Downloading trio-0.30.0-py3-none-any.whl.metadata (8.5 kB)
+[2025-08-09T12:19:38.976Z] Collecting trio-websocket~=0.12.2 (from selenium)
+[2025-08-09T12:19:38.976Z]   Downloading trio_websocket-0.12.2-py3-none-any.whl.metadata (5.1 kB)
+[2025-08-09T12:19:38.976Z] Collecting certifi>=2025.6.15 (from selenium)
+[2025-08-09T12:19:38.976Z]   Downloading certifi-2025.8.3-py3-none-any.whl.metadata (2.4 kB)
+[2025-08-09T12:19:39.234Z] Collecting typing_extensions~=4.14.0 (from selenium)
+[2025-08-09T12:19:39.234Z]   Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+[2025-08-09T12:19:39.234Z] Collecting websocket-client~=1.8.0 (from selenium)
+[2025-08-09T12:19:39.234Z]   Downloading websocket_client-1.8.0-py3-none-any.whl.metadata (8.0 kB)
+[2025-08-09T12:19:39.486Z] Collecting attrs>=23.2.0 (from trio~=0.30.0->selenium)
+[2025-08-09T12:19:39.486Z]   Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:19:39.486Z] Collecting sortedcontainers (from trio~=0.30.0->selenium)
+[2025-08-09T12:19:39.486Z]   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:19:39.486Z] Collecting idna (from trio~=0.30.0->selenium)
+[2025-08-09T12:19:39.736Z]   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:19:39.736Z] Collecting outcome (from trio~=0.30.0->selenium)
+[2025-08-09T12:19:39.736Z]   Downloading outcome-1.3.0.post0-py2.py3-none-any.whl.metadata (2.6 kB)
+[2025-08-09T12:19:39.736Z] Collecting sniffio>=1.3.0 (from trio~=0.30.0->selenium)
+[2025-08-09T12:19:39.986Z]   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+[2025-08-09T12:19:39.986Z] Collecting wsproto>=0.14 (from trio-websocket~=0.12.2->selenium)
+[2025-08-09T12:19:39.986Z]   Downloading wsproto-1.2.0-py3-none-any.whl.metadata (5.6 kB)
+[2025-08-09T12:19:39.986Z] Collecting pysocks!=1.5.7,<2.0,>=1.5.6 (from urllib3[socks]~=2.5.0->selenium)
+[2025-08-09T12:19:39.986Z]   Downloading PySocks-1.7.1-py3-none-any.whl.metadata (13 kB)
+[2025-08-09T12:19:40.242Z] Collecting h11<1,>=0.9.0 (from wsproto>=0.14->trio-websocket~=0.12.2->selenium)
+[2025-08-09T12:19:40.242Z]   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+[2025-08-09T12:19:40.242Z] Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+[2025-08-09T12:19:40.492Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.5/365.5 kB 2.3 MB/s eta 0:00:00
+[2025-08-09T12:19:40.492Z] Downloading selenium-4.34.2-py3-none-any.whl (9.4 MB)
+[2025-08-09T12:19:41.051Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.4/9.4 MB 21.5 MB/s eta 0:00:00
+[2025-08-09T12:19:41.051Z] Downloading certifi-2025.8.3-py3-none-any.whl (161 kB)
+[2025-08-09T12:19:41.051Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 161.2/161.2 kB 12.7 MB/s eta 0:00:00
+[2025-08-09T12:19:41.051Z] Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+[2025-08-09T12:19:41.051Z] Downloading packaging-25.0-py3-none-any.whl (66 kB)
+[2025-08-09T12:19:41.051Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 385.5 MB/s eta 0:00:00
+[2025-08-09T12:19:41.051Z] Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+[2025-08-09T12:19:41.310Z] Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+[2025-08-09T12:19:41.310Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 25.2 MB/s eta 0:00:00
+[2025-08-09T12:19:41.310Z] Downloading trio-0.30.0-py3-none-any.whl (499 kB)
+[2025-08-09T12:19:41.310Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 499.2/499.2 kB 25.1 MB/s eta 0:00:00
+[2025-08-09T12:19:41.310Z] Downloading trio_websocket-0.12.2-py3-none-any.whl (21 kB)
+[2025-08-09T12:19:41.560Z] Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+[2025-08-09T12:19:41.560Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 285.5 MB/s eta 0:00:00
+[2025-08-09T12:19:41.560Z] Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+[2025-08-09T12:19:41.560Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.8/129.8 kB 292.0 MB/s eta 0:00:00
+[2025-08-09T12:19:41.560Z] Downloading websocket_client-1.8.0-py3-none-any.whl (58 kB)
+[2025-08-09T12:19:41.560Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.8/58.8 kB 444.4 MB/s eta 0:00:00
+[2025-08-09T12:19:41.560Z] Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+[2025-08-09T12:19:41.560Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 233.3 MB/s eta 0:00:00
+[2025-08-09T12:19:41.560Z] Downloading outcome-1.3.0.post0-py2.py3-none-any.whl (10 kB)
+[2025-08-09T12:19:41.811Z] Downloading PySocks-1.7.1-py3-none-any.whl (16 kB)
+[2025-08-09T12:19:41.811Z] Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+[2025-08-09T12:19:41.811Z] Downloading wsproto-1.2.0-py3-none-any.whl (24 kB)
+[2025-08-09T12:19:41.811Z] Downloading idna-3.10-py3-none-any.whl (70 kB)
+[2025-08-09T12:19:41.811Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 428.9 MB/s eta 0:00:00
+[2025-08-09T12:19:41.811Z] Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+[2025-08-09T12:19:42.061Z] Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+[2025-08-09T12:19:42.061Z] Installing collected packages: sortedcontainers, websocket-client, urllib3, typing_extensions, sniffio, pysocks, pygments, pluggy, packaging, iniconfig, idna, h11, certifi, attrs, wsproto, pytest, outcome, trio, trio-websocket, selenium
+[2025-08-09T12:19:43.405Z] WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[2025-08-09T12:19:43.405Z] Successfully installed attrs-25.3.0 certifi-2025.8.3 h11-0.16.0 idna-3.10 iniconfig-2.1.0 outcome-1.3.0.post0 packaging-25.0 pluggy-1.6.0 pygments-2.19.2 pysocks-1.7.1 pytest-8.4.1 selenium-4.34.2 sniffio-1.3.1 sortedcontainers-2.4.0 trio-0.30.0 trio-websocket-0.12.2 typing_extensions-4.14.1 urllib3-2.5.0 websocket-client-1.8.0 wsproto-1.2.0
+[2025-08-09T12:19:43.659Z] 
+[2025-08-09T12:19:43.659Z] [notice] A new release of pip is available: 24.0 -> 25.2
+[2025-08-09T12:19:43.659Z] [notice] To update, run: pip install --upgrade pip
+[2025-08-09T12:20:12.711Z] ..Fs                                                                     [100%]
+[2025-08-09T12:20:12.711Z] =================================== FAILURES ===================================
+[2025-08-09T12:20:12.711Z] __________________________ test_play_with_bot_button ___________________________
+[2025-08-09T12:20:12.711Z] 
+[2025-08-09T12:20:12.711Z] driver = <selenium.webdriver.remote.webdriver.WebDriver (session="89fc5bce235f7eee9ea01e7f0295f846")>
+[2025-08-09T12:20:12.711Z] 
+[2025-08-09T12:20:12.711Z]     @pytest.mark.smoke
+[2025-08-09T12:20:12.711Z]     def test_play_with_bot_button(driver):
+[2025-08-09T12:20:12.711Z]         driver.get(WEB_URL)
+[2025-08-09T12:20:12.711Z]         # Enter username
+[2025-08-09T12:20:12.711Z]         user_input = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user")))
+[2025-08-09T12:20:12.711Z]         user_input.clear()
+[2025-08-09T12:20:12.711Z]         user_input.send_keys("serdar")
+[2025-08-09T12:20:12.711Z]         # Click "Play with a bot"
+[2025-08-09T12:20:12.711Z]         play_bot = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Play with a bot')]")))
+[2025-08-09T12:20:12.711Z]         play_bot.click()
+[2025-08-09T12:20:12.711Z]         WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
+[2025-08-09T12:20:12.711Z]         # Challenger seçim sayfası yüklenmeli - SELECT butonu görünmeli
+[2025-08-09T12:20:12.711Z] >       WebDriverWait(driver, 15).until(
+[2025-08-09T12:20:12.711Z]             EC.presence_of_element_located((By.XPATH, "//button[contains(text(), 'SELECT')]"))
+[2025-08-09T12:20:12.711Z]         )
+[2025-08-09T12:20:12.711Z] 
+[2025-08-09T12:20:12.711Z] tests/ui/test_smoke.py:57: 
+[2025-08-09T12:20:12.711Z] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[2025-08-09T12:20:12.711Z] 
+[2025-08-09T12:20:12.711Z] self = <selenium.webdriver.support.wait.WebDriverWait (session="89fc5bce235f7eee9ea01e7f0295f846")>
+[2025-08-09T12:20:12.711Z] method = <function presence_of_element_located.<locals>._predicate at 0xffffb8e1d6c0>
+[2025-08-09T12:20:12.711Z] message = ''
+[2025-08-09T12:20:12.711Z] 
+[2025-08-09T12:20:12.711Z]     def until(self, method: Callable[[D], Union[Literal[False], T]], message: str = "") -> T:
+[2025-08-09T12:20:12.711Z]         """Wait until the method returns a value that is not False.
+[2025-08-09T12:20:12.711Z]     
+[2025-08-09T12:20:12.711Z]         Calls the method provided with the driver as an argument until the
+[2025-08-09T12:20:12.711Z]         return value does not evaluate to ``False``.
+[2025-08-09T12:20:12.711Z]     
+[2025-08-09T12:20:12.712Z]         Parameters:
+[2025-08-09T12:20:12.712Z]         -----------
+[2025-08-09T12:20:12.712Z]         method: callable(WebDriver)
+[2025-08-09T12:20:12.712Z]             - A callable object that takes a WebDriver instance as an argument.
+[2025-08-09T12:20:12.712Z]     
+[2025-08-09T12:20:12.712Z]         message: str
+[2025-08-09T12:20:12.712Z]             - Optional message for :exc:`TimeoutException`
+[2025-08-09T12:20:12.712Z]     
+[2025-08-09T12:20:12.712Z]         Return:
+[2025-08-09T12:20:12.712Z]         -------
+[2025-08-09T12:20:12.712Z]         object: T
+[2025-08-09T12:20:12.712Z]             - The result of the last call to `method`
+[2025-08-09T12:20:12.712Z]     
+[2025-08-09T12:20:12.712Z]         Raises:
+[2025-08-09T12:20:12.712Z]         -------
+[2025-08-09T12:20:12.712Z]         TimeoutException
+[2025-08-09T12:20:12.712Z]             - If 'method' does not return a truthy value within the WebDriverWait
+[2025-08-09T12:20:12.712Z]             object's timeout
+[2025-08-09T12:20:12.712Z]     
+[2025-08-09T12:20:12.712Z]         Example:
+[2025-08-09T12:20:12.712Z]         --------
+[2025-08-09T12:20:12.712Z]         >>> from selenium.webdriver.common.by import By
+[2025-08-09T12:20:12.712Z]         >>> from selenium.webdriver.support.ui import WebDriverWait
+[2025-08-09T12:20:12.712Z]         >>> from selenium.webdriver.support import expected_conditions as EC
+[2025-08-09T12:20:12.712Z]     
+[2025-08-09T12:20:12.712Z]         # Wait until an element is visible on the page
+[2025-08-09T12:20:12.712Z]         >>> wait = WebDriverWait(driver, 10)
+[2025-08-09T12:20:12.712Z]         >>> element = wait.until(EC.visibility_of_element_located((By.ID, "exampleId")))
+[2025-08-09T12:20:12.712Z]         >>> print(element.text)
+[2025-08-09T12:20:12.712Z]         """
+[2025-08-09T12:20:12.712Z]         screen = None
+[2025-08-09T12:20:12.712Z]         stacktrace = None
+[2025-08-09T12:20:12.712Z]     
+[2025-08-09T12:20:12.712Z]         end_time = time.monotonic() + self._timeout
+[2025-08-09T12:20:12.712Z]         while True:
+[2025-08-09T12:20:12.712Z]             try:
+[2025-08-09T12:20:12.712Z]                 value = method(self._driver)
+[2025-08-09T12:20:12.712Z]                 if value:
+[2025-08-09T12:20:12.712Z]                     return value
+[2025-08-09T12:20:12.712Z]             except self._ignored_exceptions as exc:
+[2025-08-09T12:20:12.712Z]                 screen = getattr(exc, "screen", None)
+[2025-08-09T12:20:12.712Z]                 stacktrace = getattr(exc, "stacktrace", None)
+[2025-08-09T12:20:12.712Z]             if time.monotonic() > end_time:
+[2025-08-09T12:20:12.712Z]                 break
+[2025-08-09T12:20:12.712Z]             time.sleep(self._poll)
+[2025-08-09T12:20:12.712Z] >       raise TimeoutException(message, screen, stacktrace)
+[2025-08-09T12:20:12.712Z] E       selenium.common.exceptions.TimeoutException: Message: 
+[2025-08-09T12:20:12.712Z] E       Stacktrace:
+[2025-08-09T12:20:12.712Z] E       #0 0xaaaad6e87d44 <unknown>
+[2025-08-09T12:20:12.712Z] E       #1 0xaaaad6bae374 <unknown>
+[2025-08-09T12:20:12.712Z] E       #2 0xaaaad6beb4e0 <unknown>
+[2025-08-09T12:20:12.712Z] E       #3 0xaaaad6c28400 <unknown>
+[2025-08-09T12:20:12.712Z] E       #4 0xaaaad6be14a4 <unknown>
+[2025-08-09T12:20:12.712Z] E       #5 0xaaaad6be20e0 <unknown>
+[2025-08-09T12:20:12.712Z] E       #6 0xaaaad6e55ac0 <unknown>
+[2025-08-09T12:20:12.712Z] E       #7 0xaaaad6e58a64 <unknown>
+[2025-08-09T12:20:12.712Z] E       #8 0xaaaad6e58630 <unknown>
+[2025-08-09T12:20:12.712Z] E       #9 0xaaaad6e46d6c <unknown>
+[2025-08-09T12:20:12.712Z] E       #10 0xaaaad6e59128 <unknown>
+[2025-08-09T12:20:12.712Z] E       #11 0xaaaad6e31010 <unknown>
+[2025-08-09T12:20:12.712Z] E       #12 0xaaaad6e78550 <unknown>
+[2025-08-09T12:20:12.712Z] E       #13 0xaaaad6e78758 <unknown>
+[2025-08-09T12:20:12.712Z] E       #14 0xaaaad6e87250 <unknown>
+[2025-08-09T12:20:12.712Z] E       #15 0xffffae25ee58 <unknown>
+[2025-08-09T12:20:12.712Z] E       #16 0xffffae2c7f9c <unknown>
+[2025-08-09T12:20:12.712Z] 
+[2025-08-09T12:20:12.712Z] /usr/local/lib/python3.11/site-packages/selenium/webdriver/support/wait.py:138: TimeoutException
+[2025-08-09T12:20:12.712Z] - generated xml file: /var/jenkins_home/workspace/rpsls-pipeline@2/reports/ui/smoke.xml -
+[2025-08-09T12:20:12.712Z] =========================== short test summary info ============================
+[2025-08-09T12:20:12.712Z] FAILED tests/ui/test_smoke.py::test_play_with_bot_button - selenium.common.ex...
+[2025-08-09T12:20:12.712Z] 1 failed, 2 passed, 1 skipped, 4 deselected in 28.14s
+[2025-08-09T12:20:41.177Z] ..Fs                                                                     [100%]
+[2025-08-09T12:20:41.177Z] =================================== FAILURES ===================================
+[2025-08-09T12:20:41.177Z] __________________________ test_play_with_bot_button ___________________________
+[2025-08-09T12:20:41.177Z] 
+[2025-08-09T12:20:41.177Z] driver = <selenium.webdriver.remote.webdriver.WebDriver (session="3d412f1dfad521bc2b49e276243ae290")>
+[2025-08-09T12:20:41.177Z] 
+[2025-08-09T12:20:41.177Z]     @pytest.mark.smoke
+[2025-08-09T12:20:41.177Z]     def test_play_with_bot_button(driver):
+[2025-08-09T12:20:41.177Z]         driver.get(WEB_URL)
+[2025-08-09T12:20:41.177Z]         # Enter username
+[2025-08-09T12:20:41.177Z]         user_input = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user")))
+[2025-08-09T12:20:41.177Z]         user_input.clear()
+[2025-08-09T12:20:41.177Z]         user_input.send_keys("serdar")
+[2025-08-09T12:20:41.177Z]         # Click "Play with a bot"
+[2025-08-09T12:20:41.177Z]         play_bot = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Play with a bot')]")))
+[2025-08-09T12:20:41.177Z]         play_bot.click()
+[2025-08-09T12:20:41.177Z]         WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
+[2025-08-09T12:20:41.177Z]         # Challenger seçim sayfası yüklenmeli - SELECT butonu görünmeli
+[2025-08-09T12:20:41.177Z] >       WebDriverWait(driver, 15).until(
+[2025-08-09T12:20:41.177Z]             EC.presence_of_element_located((By.XPATH, "//button[contains(text(), 'SELECT')]"))
+[2025-08-09T12:20:41.177Z]         )
+[2025-08-09T12:20:41.177Z] 
+[2025-08-09T12:20:41.177Z] tests/ui/test_smoke.py:57: 
+[2025-08-09T12:20:41.177Z] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+[2025-08-09T12:20:41.177Z] 
+[2025-08-09T12:20:41.177Z] self = <selenium.webdriver.support.wait.WebDriverWait (session="3d412f1dfad521bc2b49e276243ae290")>
+[2025-08-09T12:20:41.177Z] method = <function presence_of_element_located.<locals>._predicate at 0xffff8f0ed1c0>
+[2025-08-09T12:20:41.177Z] message = ''
+[2025-08-09T12:20:41.177Z] 
+[2025-08-09T12:20:41.177Z]     def until(self, method: Callable[[D], Union[Literal[False], T]], message: str = "") -> T:
+[2025-08-09T12:20:41.178Z]         """Wait until the method returns a value that is not False.
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         Calls the method provided with the driver as an argument until the
+[2025-08-09T12:20:41.178Z]         return value does not evaluate to ``False``.
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         Parameters:
+[2025-08-09T12:20:41.178Z]         -----------
+[2025-08-09T12:20:41.178Z]         method: callable(WebDriver)
+[2025-08-09T12:20:41.178Z]             - A callable object that takes a WebDriver instance as an argument.
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         message: str
+[2025-08-09T12:20:41.178Z]             - Optional message for :exc:`TimeoutException`
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         Return:
+[2025-08-09T12:20:41.178Z]         -------
+[2025-08-09T12:20:41.178Z]         object: T
+[2025-08-09T12:20:41.178Z]             - The result of the last call to `method`
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         Raises:
+[2025-08-09T12:20:41.178Z]         -------
+[2025-08-09T12:20:41.178Z]         TimeoutException
+[2025-08-09T12:20:41.178Z]             - If 'method' does not return a truthy value within the WebDriverWait
+[2025-08-09T12:20:41.178Z]             object's timeout
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         Example:
+[2025-08-09T12:20:41.178Z]         --------
+[2025-08-09T12:20:41.178Z]         >>> from selenium.webdriver.common.by import By
+[2025-08-09T12:20:41.178Z]         >>> from selenium.webdriver.support.ui import WebDriverWait
+[2025-08-09T12:20:41.178Z]         >>> from selenium.webdriver.support import expected_conditions as EC
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         # Wait until an element is visible on the page
+[2025-08-09T12:20:41.178Z]         >>> wait = WebDriverWait(driver, 10)
+[2025-08-09T12:20:41.178Z]         >>> element = wait.until(EC.visibility_of_element_located((By.ID, "exampleId")))
+[2025-08-09T12:20:41.178Z]         >>> print(element.text)
+[2025-08-09T12:20:41.178Z]         """
+[2025-08-09T12:20:41.178Z]         screen = None
+[2025-08-09T12:20:41.178Z]         stacktrace = None
+[2025-08-09T12:20:41.178Z]     
+[2025-08-09T12:20:41.178Z]         end_time = time.monotonic() + self._timeout
+[2025-08-09T12:20:41.178Z]         while True:
+[2025-08-09T12:20:41.178Z]             try:
+[2025-08-09T12:20:41.178Z]                 value = method(self._driver)
+[2025-08-09T12:20:41.178Z]                 if value:
+[2025-08-09T12:20:41.178Z]                     return value
+[2025-08-09T12:20:41.178Z]             except self._ignored_exceptions as exc:
+[2025-08-09T12:20:41.178Z]                 screen = getattr(exc, "screen", None)
+[2025-08-09T12:20:41.178Z]                 stacktrace = getattr(exc, "stacktrace", None)
+[2025-08-09T12:20:41.178Z]             if time.monotonic() > end_time:
+[2025-08-09T12:20:41.178Z]                 break
+[2025-08-09T12:20:41.178Z]             time.sleep(self._poll)
+[2025-08-09T12:20:41.178Z] >       raise TimeoutException(message, screen, stacktrace)
+[2025-08-09T12:20:41.178Z] E       selenium.common.exceptions.TimeoutException: Message: 
+[2025-08-09T12:20:41.178Z] E       Stacktrace:
+[2025-08-09T12:20:41.178Z] E       #0 0xaaaabf6f7d44 <unknown>
+[2025-08-09T12:20:41.178Z] E       #1 0xaaaabf41e374 <unknown>
+[2025-08-09T12:20:41.178Z] E       #2 0xaaaabf45b4e0 <unknown>
+[2025-08-09T12:20:41.178Z] E       #3 0xaaaabf498400 <unknown>
+[2025-08-09T12:20:41.178Z] E       #4 0xaaaabf4514a4 <unknown>
+[2025-08-09T12:20:41.178Z] E       #5 0xaaaabf4520e0 <unknown>
+[2025-08-09T12:20:41.178Z] E       #6 0xaaaabf6c5ac0 <unknown>
+[2025-08-09T12:20:41.178Z] E       #7 0xaaaabf6c8a64 <unknown>
+[2025-08-09T12:20:41.178Z] E       #8 0xaaaabf6c8630 <unknown>
+[2025-08-09T12:20:41.178Z] E       #9 0xaaaabf6b6d6c <unknown>
+[2025-08-09T12:20:41.178Z] E       #10 0xaaaabf6c9128 <unknown>
+[2025-08-09T12:20:41.178Z] E       #11 0xaaaabf6a1010 <unknown>
+[2025-08-09T12:20:41.178Z] E       #12 0xaaaabf6e8550 <unknown>
+[2025-08-09T12:20:41.178Z] E       #13 0xaaaabf6e8758 <unknown>
+[2025-08-09T12:20:41.178Z] E       #14 0xaaaabf6f7250 <unknown>
+[2025-08-09T12:20:41.178Z] E       #15 0xffffbd46ee58 <unknown>
+[2025-08-09T12:20:41.178Z] E       #16 0xffffbd4d7f9c <unknown>
+[2025-08-09T12:20:41.178Z] 
+[2025-08-09T12:20:41.178Z] /usr/local/lib/python3.11/site-packages/selenium/webdriver/support/wait.py:138: TimeoutException
+[2025-08-09T12:20:41.178Z] - generated xml file: /var/jenkins_home/workspace/rpsls-pipeline@2/reports/ui/smoke.xml -
+[2025-08-09T12:20:41.178Z] =========================== short test summary info ============================
+[2025-08-09T12:20:41.178Z] FAILED tests/ui/test_smoke.py::test_play_with_bot_button - selenium.common.ex...
+[2025-08-09T12:20:41.178Z] 1 failed, 2 passed, 1 skipped, 4 deselected in 27.53s
+Post stage
+[Pipeline] junit
+[2025-08-09T12:20:41.243Z] Recording test results
+[2025-08-09T12:20:41.251Z] [Checks API] No suitable checks publisher found.
+[Pipeline] archiveArtifacts
+[2025-08-09T12:20:41.273Z] Archiving artifacts
+[Pipeline] sh
+[2025-08-09T12:20:41.541Z] + docker rm -f selenium
+[2025-08-09T12:20:41.791Z] + docker network rm rpsls-tests
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push)
+Stage "Push" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+Stage "Deploy" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (UI Tests (Regression))
+Stage "UI Tests (Regression)" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE

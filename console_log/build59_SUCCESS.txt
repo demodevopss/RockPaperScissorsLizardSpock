@@ -1,0 +1,630 @@
+Started by user Serdar Selçuk
+Obtained Jenkinsfile from git https://github.com/demodevopss/RockPaperScissorsLizardSpock.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/rpsls-pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential github-https
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/rpsls-pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/demodevopss/RockPaperScissorsLizardSpock.git # timeout=10
+Fetching upstream changes from https://github.com/demodevopss/RockPaperScissorsLizardSpock.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+using GIT_ASKPASS to set credentials github-https
+ > git fetch --tags --force --progress -- https://github.com/demodevopss/RockPaperScissorsLizardSpock.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision ce8dca069ca4719d7151f9cea786cab4c512a2f3 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ce8dca069ca4719d7151f9cea786cab4c512a2f3 # timeout=10
+Commit message: "Simplify smoke test - only check URL navigation to challenger"
+ > git rev-list --no-walk cff903d7f9937754bca5a4c63ccfe41a9e33ad1c # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+[2025-08-09T12:26:09.781Z] The recommended git tool is: git
+[2025-08-09T12:26:09.781Z] No credentials specified
+[2025-08-09T12:26:09.781Z]  > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/rpsls-pipeline/.git # timeout=10
+[2025-08-09T12:26:09.804Z] Fetching changes from the remote Git repository
+[2025-08-09T12:26:09.805Z]  > git config remote.origin.url https://github.com/demodevopss/RockPaperScissorsLizardSpock.git # timeout=10
+[2025-08-09T12:26:09.808Z] Fetching upstream changes from https://github.com/demodevopss/RockPaperScissorsLizardSpock.git
+[2025-08-09T12:26:09.808Z]  > git --version # timeout=10
+[2025-08-09T12:26:09.810Z]  > git --version # 'git version 2.39.5'
+[2025-08-09T12:26:09.810Z]  > git fetch --tags --force --progress -- https://github.com/demodevopss/RockPaperScissorsLizardSpock.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+[2025-08-09T12:26:10.227Z]  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+[2025-08-09T12:26:10.229Z] Checking out Revision ce8dca069ca4719d7151f9cea786cab4c512a2f3 (refs/remotes/origin/main)
+[2025-08-09T12:26:10.229Z]  > git config core.sparsecheckout # timeout=10
+[2025-08-09T12:26:10.230Z]  > git checkout -f ce8dca069ca4719d7151f9cea786cab4c512a2f3 # timeout=10
+[2025-08-09T12:26:10.235Z] Commit message: "Simplify smoke test - only check URL navigation to challenger"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Build)
+[Pipeline] sh
+[2025-08-09T12:26:10.536Z] + docker version
+[2025-08-09T12:26:10.536Z] Client:
+[2025-08-09T12:26:10.536Z]  Version:           20.10.24+dfsg1
+[2025-08-09T12:26:10.536Z]  API version:       1.41
+[2025-08-09T12:26:10.536Z]  Go version:        go1.19.8
+[2025-08-09T12:26:10.536Z]  Git commit:        297e128
+[2025-08-09T12:26:10.536Z]  Built:             Fri Apr 18 15:03:29 2025
+[2025-08-09T12:26:10.536Z]  OS/Arch:           linux/arm64
+[2025-08-09T12:26:10.536Z]  Context:           default
+[2025-08-09T12:26:10.536Z]  Experimental:      true
+[2025-08-09T12:26:10.536Z] 
+[2025-08-09T12:26:10.536Z] Server: Docker Engine - Community
+[2025-08-09T12:26:10.536Z]  Engine:
+[2025-08-09T12:26:10.536Z]   Version:          28.3.3
+[2025-08-09T12:26:10.536Z]   API version:      1.51 (minimum version 1.24)
+[2025-08-09T12:26:10.536Z]   Go version:       go1.24.5
+[2025-08-09T12:26:10.536Z]   Git commit:       bea959c
+[2025-08-09T12:26:10.536Z]   Built:            Fri Jul 25 11:35:23 2025
+[2025-08-09T12:26:10.536Z]   OS/Arch:          linux/arm64
+[2025-08-09T12:26:10.536Z]   Experimental:     false
+[2025-08-09T12:26:10.536Z]  containerd:
+[2025-08-09T12:26:10.536Z]   Version:          1.7.27
+[2025-08-09T12:26:10.536Z]   GitCommit:        05044ec0a9a75232cad458027ca83437aae3f4da
+[2025-08-09T12:26:10.536Z]  runc:
+[2025-08-09T12:26:10.536Z]   Version:          1.2.5
+[2025-08-09T12:26:10.536Z]   GitCommit:        v1.2.5-0-g59923ef
+[2025-08-09T12:26:10.536Z]  docker-init:
+[2025-08-09T12:26:10.536Z]   Version:          0.19.0
+[2025-08-09T12:26:10.536Z]   GitCommit:        de40ad0
+[Pipeline] sh
+[2025-08-09T12:26:10.799Z] + docker build -t devopsserdar/rpsls:latest -t devopsserdar/rpsls:59 .
+[2025-08-09T12:26:10.799Z] #1 [internal] load build definition from Dockerfile
+[2025-08-09T12:26:10.799Z] #1 sha256:ee58276ab821c2e057896d4fdf0acf0b8d0d26989a2588f73d6fc0c9ccbfe3c2
+[2025-08-09T12:26:10.799Z] #1 transferring dockerfile: 741B done
+[2025-08-09T12:26:10.799Z] #1 DONE 0.0s
+[2025-08-09T12:26:10.799Z] 
+[2025-08-09T12:26:10.799Z] #3 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0-focal
+[2025-08-09T12:26:10.799Z] #3 sha256:36c7f9f43c6afda9cc3d33fd7dc601cb800206ed26b9c00204532473765f629d
+[2025-08-09T12:26:11.051Z] #3 DONE 0.3s
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #2 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:5.0-focal
+[2025-08-09T12:26:11.051Z] #2 sha256:bd7d980268fa0ca85f3abe4180fa95be6c9fde8e77d1bcd2b7645247afd91cc5
+[2025-08-09T12:26:11.051Z] #2 DONE 0.3s
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #4 [internal] load .dockerignore
+[2025-08-09T12:26:11.051Z] #4 sha256:0e87b52ad62e294aa626b1b9edd6abd18d83eba527dac7446f2185d23382dd73
+[2025-08-09T12:26:11.051Z] #4 transferring context: 2B done
+[2025-08-09T12:26:11.051Z] #4 DONE 0.0s
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #9 [build 1/7] FROM mcr.microsoft.com/dotnet/sdk:5.0-focal@sha256:c652a1f1e82c2ee8e21acc256c69d0358386abca17f308c18abf6467027786c8
+[2025-08-09T12:26:11.051Z] #9 sha256:fa15cc1e78e977e53927ea844bdd0a895b13770af1f3983aba5ed8bc6f471acf
+[2025-08-09T12:26:11.051Z] #9 DONE 0.0s
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #11 [runtime 1/3] FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal@sha256:f6e3a7fab8341c023fb091a54a53b01825c70c8784f731fecf5edfe260cd499c
+[2025-08-09T12:26:11.051Z] #11 sha256:25179a6e784a802ae31331fd08bdc745df7e6d921032f947ba4bdc021e13184a
+[2025-08-09T12:26:11.051Z] #11 DONE 0.0s
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #6 [internal] load build context
+[2025-08-09T12:26:11.051Z] #6 sha256:cb9bb31645a7ce5818807203e0794bc88997ee056f86a83f3eedd2151b03ccf8
+[2025-08-09T12:26:11.051Z] #6 transferring context: 47.59kB 0.0s done
+[2025-08-09T12:26:11.051Z] #6 DONE 0.0s
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #5 [build 4/7] COPY Source/ ./Source/
+[2025-08-09T12:26:11.051Z] #5 sha256:9575514d372d66f8c5eee252a8cd87ba76320809f17b603dc4287e8c562dc60a
+[2025-08-09T12:26:11.051Z] #5 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #13 [build 7/7] RUN dotnet publish ./Source/Services/RPSLS.Game.Api/RPSLS.Game.Api.csproj     -c Release -o /app/publish --no-restore
+[2025-08-09T12:26:11.051Z] #13 sha256:6ee8428ee8dfff2366d76032de502f3cd2d1d9bcb3af554f5fb12d9743c22bf1
+[2025-08-09T12:26:11.051Z] #13 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #15 [build 5/7] COPY Source/RPSLS.sln ./Source/
+[2025-08-09T12:26:11.051Z] #15 sha256:384eae282df385f1d041e04faed4e90cdbc44f5d44f6177dba8de4d752e72e64
+[2025-08-09T12:26:11.051Z] #15 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #7 [build 3/7] RUN apt-get update     && apt-get install -y --no-install-recommends protobuf-compiler     && rm -rf /var/lib/apt/lists/*
+[2025-08-09T12:26:11.051Z] #7 sha256:394265e82f505a09cc14255671fbf950b043578b6803f54e79c2a3470cfb6d5c
+[2025-08-09T12:26:11.051Z] #7 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #10 [runtime 2/3] WORKDIR /app
+[2025-08-09T12:26:11.051Z] #10 sha256:ad3223e0eb67a81bb557faa026e39a4737a8c2f1b79509c0f868c60651a20101
+[2025-08-09T12:26:11.051Z] #10 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #14 [build 6/7] RUN dotnet restore ./Source/RPSLS.sln
+[2025-08-09T12:26:11.051Z] #14 sha256:bf1b6b987fcfdf903cfb645ea393bb68008bda1cd8fd8653ceb8c89b3c62dafa
+[2025-08-09T12:26:11.051Z] #14 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #8 [build 2/7] WORKDIR /src
+[2025-08-09T12:26:11.051Z] #8 sha256:d3f5ff393ddd5874b0e1e4fe4bd5027a4f4870e8227126dc49430ee16547292f
+[2025-08-09T12:26:11.051Z] #8 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #12 [runtime 3/3] COPY --from=build /app/publish ./
+[2025-08-09T12:26:11.051Z] #12 sha256:8795ca7d4310ec532691fa4cf8ad43abc6495a233ca8fe1917e4c1b3f41f65f3
+[2025-08-09T12:26:11.051Z] #12 CACHED
+[2025-08-09T12:26:11.051Z] 
+[2025-08-09T12:26:11.051Z] #16 exporting to image
+[2025-08-09T12:26:11.051Z] #16 sha256:29e085ffc0679304ff375a4ffd8e8103914b7312f810c31582597a43b38c9662
+[2025-08-09T12:26:11.051Z] #16 exporting layers done
+[2025-08-09T12:26:11.051Z] #16 writing image sha256:18f4ca5418d6dedb45974fa9d6ceae3108648eb1f78d0bed06409029f4b30faf done
+[2025-08-09T12:26:11.051Z] #16 naming to docker.io/devopsserdar/rpsls:latest done
+[2025-08-09T12:26:11.051Z] #16 naming to docker.io/devopsserdar/rpsls:59 done
+[2025-08-09T12:26:11.051Z] #16 DONE 0.0s
+[Pipeline] sh
+[2025-08-09T12:26:11.319Z] + docker build -t devopsserdar/rpsls-web:latest -t devopsserdar/rpsls-web:59 -f Source/Services/RPSLS.Game/Server/Dockerfile Source/Services
+[2025-08-09T12:26:11.319Z] #1 [internal] load build definition from Dockerfile
+[2025-08-09T12:26:11.319Z] #1 sha256:48ad73677d5a1f7aa93a482ef20523f1edfe978219759947033da1060a3b3f3e
+[2025-08-09T12:26:11.319Z] #1 transferring dockerfile: 1.11kB done
+[2025-08-09T12:26:11.319Z] #1 DONE 0.0s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #3 [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:5.0-focal
+[2025-08-09T12:26:11.319Z] #3 sha256:36c7f9f43c6afda9cc3d33fd7dc601cb800206ed26b9c00204532473765f629d
+[2025-08-09T12:26:11.319Z] #3 DONE 0.1s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #2 [internal] load metadata for mcr.microsoft.com/dotnet/sdk:5.0-focal
+[2025-08-09T12:26:11.319Z] #2 sha256:bd7d980268fa0ca85f3abe4180fa95be6c9fde8e77d1bcd2b7645247afd91cc5
+[2025-08-09T12:26:11.319Z] #2 DONE 0.1s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #4 [internal] load .dockerignore
+[2025-08-09T12:26:11.319Z] #4 sha256:0b98574982d256ae3c0b7439bf2ae6ea6b98042e41579aa3c1229a0da2c367ea
+[2025-08-09T12:26:11.319Z] #4 transferring context: 2B done
+[2025-08-09T12:26:11.319Z] #4 DONE 0.0s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #5 [build 1/9] FROM mcr.microsoft.com/dotnet/sdk:5.0-focal@sha256:c652a1f1e82c2ee8e21acc256c69d0358386abca17f308c18abf6467027786c8
+[2025-08-09T12:26:11.319Z] #5 sha256:fa15cc1e78e977e53927ea844bdd0a895b13770af1f3983aba5ed8bc6f471acf
+[2025-08-09T12:26:11.319Z] #5 DONE 0.0s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #8 [base 1/2] FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal@sha256:f6e3a7fab8341c023fb091a54a53b01825c70c8784f731fecf5edfe260cd499c
+[2025-08-09T12:26:11.319Z] #8 sha256:25179a6e784a802ae31331fd08bdc745df7e6d921032f947ba4bdc021e13184a
+[2025-08-09T12:26:11.319Z] #8 DONE 0.0s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #17 [internal] load build context
+[2025-08-09T12:26:11.319Z] #17 sha256:33d73431e83528d871ed95ae02200dab0f14869dd79df5851ffc45eaa46bf478
+[2025-08-09T12:26:11.319Z] #17 transferring context: 37.88kB done
+[2025-08-09T12:26:11.319Z] #17 DONE 0.0s
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #16 [build 4/9] COPY [./RPSLS.Game/Server/RPSLS.Game.Server.csproj, RPSLS.Game/Server/]
+[2025-08-09T12:26:11.319Z] #16 sha256:81236cb3b9e4338d6f85da7372ae383c49e724fd7939c2ec1d1dbcdc375200cf
+[2025-08-09T12:26:11.319Z] #16 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #13 [build 7/9] RUN dotnet restore "./RPSLS.Game/Server/RPSLS.Game.Server.csproj"
+[2025-08-09T12:26:11.319Z] #13 sha256:91b7c019f47985b53e977a419f737eabc2e7ae5c0a6f65acc4968744453d46eb
+[2025-08-09T12:26:11.319Z] #13 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #7 [base 2/2] WORKDIR /app
+[2025-08-09T12:26:11.319Z] #7 sha256:ad3223e0eb67a81bb557faa026e39a4737a8c2f1b79509c0f868c60651a20101
+[2025-08-09T12:26:11.319Z] #7 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #18 [build 3/9] RUN apt-get update && apt-get install -y --no-install-recommends protobuf-compiler && rm -rf /var/lib/apt/lists/*
+[2025-08-09T12:26:11.319Z] #18 sha256:f8e1b3f7ecf68812090de13cc77351cf031880d637e4d55ddb687bc07f3b337a
+[2025-08-09T12:26:11.319Z] #18 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #11 [build 9/9] RUN dotnet build "./RPSLS.Game/Server/RPSLS.Game.Server.csproj" -c Release -o /app/build
+[2025-08-09T12:26:11.319Z] #11 sha256:101ae433ca83f53390252487e174f827913f545c43dd26ef2bcbc949f2faa7b3
+[2025-08-09T12:26:11.319Z] #11 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #15 [build 5/9] COPY [./RPSLS.Game/Client/RPSLS.Game.Client.csproj, RPSLS.Game/Client/]
+[2025-08-09T12:26:11.319Z] #15 sha256:b29dbfc6f1051265dc75acd8e1d94b70c1c6ec6a826eb9e628a4a40dd3e486a7
+[2025-08-09T12:26:11.319Z] #15 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #10 [publish 1/1] RUN dotnet publish "./RPSLS.Game/Server/RPSLS.Game.Server.csproj" -c Release -o /app/publish
+[2025-08-09T12:26:11.319Z] #10 sha256:379e0633ac334c9c7aa3392c9b0b6b88fe53b5a5b23f90bf71417e8f3395065d
+[2025-08-09T12:26:11.319Z] #10 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #12 [build 8/9] COPY . .
+[2025-08-09T12:26:11.319Z] #12 sha256:3cc7aa3cf6901d2a0cfb5eba4fdab74f320def02f08bc6f2cc5bf342eb24dd3e
+[2025-08-09T12:26:11.319Z] #12 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #19 [build 2/9] WORKDIR /src/project
+[2025-08-09T12:26:11.319Z] #19 sha256:b6d29369ad181eacd9af61fb4bfe89fc4ed144e9667daa8d25e5ea8080658192
+[2025-08-09T12:26:11.319Z] #19 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #14 [build 6/9] COPY [./RPSLS.Game/Shared/RPSLS.Game.Shared.csproj, RPSLS.Game/Shared/]
+[2025-08-09T12:26:11.319Z] #14 sha256:73794bc16465886f13ee577ade839f655dfbdb592c82529fcb8236b46f2e4ec0
+[2025-08-09T12:26:11.319Z] #14 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #6 [final 1/2] WORKDIR /app
+[2025-08-09T12:26:11.319Z] #6 sha256:0a8ce9661e5dbc16882fb46e6c112793dace73ad62e707def8731bc8470e991c
+[2025-08-09T12:26:11.319Z] #6 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #9 [final 2/2] COPY --from=publish /app/publish .
+[2025-08-09T12:26:11.319Z] #9 sha256:29b6c951e978d18fb8a14211b7db3fe030727c82cb6e46763ac1d9200273815e
+[2025-08-09T12:26:11.319Z] #9 CACHED
+[2025-08-09T12:26:11.319Z] 
+[2025-08-09T12:26:11.319Z] #20 exporting to image
+[2025-08-09T12:26:11.319Z] #20 sha256:c73256413fd19090840cd6e76309a21d8be3f6c0e085a44a7d8fdaf3091f330e
+[2025-08-09T12:26:11.319Z] #20 exporting layers done
+[2025-08-09T12:26:11.319Z] #20 writing image sha256:bee67eb3cf08ef36c68e445e8adde8ac4b9988fdccbcea09c52f666e7c18193d done
+[2025-08-09T12:26:11.319Z] #20 naming to docker.io/devopsserdar/rpsls-web:latest done
+[2025-08-09T12:26:11.319Z] #20 naming to docker.io/devopsserdar/rpsls-web:59 done
+[2025-08-09T12:26:11.319Z] #20 DONE 0.0s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Trivy Scan)
+[Pipeline] sh
+[2025-08-09T12:26:11.619Z] + trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL devopsserdar/rpsls:latest
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	[vuln] Vulnerability scanning is enabled
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	[secret] Secret scanning is enabled
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	[secret] Please see also https://trivy.dev/v0.65/docs/scanner/secret#recommendation for faster secret detection
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	Detected OS	family="ubuntu" version="20.04"
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	[ubuntu] Detecting vulnerabilities...	os_version="20.04" pkg_num=103
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	Number of language-specific files	num=3
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	[dotnet-core] Detecting vulnerabilities...
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	WARN	This OS version is no longer supported by the distribution	family="ubuntu" version="20.04"
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	WARN	The vulnerability detection may be insufficient because security updates are not provided
+[2025-08-09T12:26:11.619Z] 2025-08-09T12:26:11Z	INFO	Some vulnerabilities have been ignored/suppressed. Use the "--show-suppressed" flag to display them.
+[2025-08-09T12:26:11.619Z] 
+[2025-08-09T12:26:11.619Z] Report Summary
+[2025-08-09T12:26:11.619Z] 
+[2025-08-09T12:26:11.619Z] ┌──────────────────────────────────────────────────────────────────────────────────┬─────────────┬─────────────────┬─────────┐
+[2025-08-09T12:26:11.620Z] │                                      Target                                      │    Type     │ Vulnerabilities │ Secrets │
+[2025-08-09T12:26:11.620Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:26:11.620Z] │ devopsserdar/rpsls:latest (ubuntu 20.04)                                         │   ubuntu    │        0        │    -    │
+[2025-08-09T12:26:11.620Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:26:11.620Z] │ app/RPSLS.Game.Api.deps.json                                                     │ dotnet-core │        0        │    -    │
+[2025-08-09T12:26:11.620Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:26:11.620Z] │ usr/share/dotnet/shared/Microsoft.AspNetCore.App/5.0.17/Microsoft.AspNetCore.Ap- │ dotnet-core │        0        │    -    │
+[2025-08-09T12:26:11.620Z] │ p.deps.json                                                                      │             │                 │         │
+[2025-08-09T12:26:11.620Z] ├──────────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────────┼─────────┤
+[2025-08-09T12:26:11.620Z] │ usr/share/dotnet/shared/Microsoft.NETCore.App/5.0.17/Microsoft.NETCore.App.deps- │ dotnet-core │        0        │    -    │
+[2025-08-09T12:26:11.620Z] │ .json                                                                            │             │                 │         │
+[2025-08-09T12:26:11.620Z] └──────────────────────────────────────────────────────────────────────────────────┴─────────────┴─────────────────┴─────────┘
+[2025-08-09T12:26:11.620Z] Legend:
+[2025-08-09T12:26:11.620Z] - '-': Not scanned
+[2025-08-09T12:26:11.620Z] - '0': Clean (no security findings detected)
+[2025-08-09T12:26:11.620Z] 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (UI Tests (Smoke))
+[Pipeline] sh
+[2025-08-09T12:26:11.938Z] + set -e
+[2025-08-09T12:26:11.938Z] + WEB_URL=http://192.168.64.153:30081
+[2025-08-09T12:26:11.938Z] + API_URL=http://192.168.64.153:30080
+[2025-08-09T12:26:11.938Z] + mkdir -p reports/ui
+[2025-08-09T12:26:11.938Z] + docker network create rpsls-tests
+[2025-08-09T12:26:11.938Z] + docker rm -f selenium
+[2025-08-09T12:26:11.938Z] + docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
+[2025-08-09T12:26:11.938Z] 8a5ec781c149d18e645456d1f52c679d2fc8d6e2e2b201f1c3f1ae2f68d88e0d
+[2025-08-09T12:26:11.938Z] + docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=http://192.168.64.153:30081 -e API_URL=http://192.168.64.153:30080 -w /var/jenkins_home/workspace/rpsls-pipeline python:3.11-slim sh -lc pip install --no-cache-dir pytest selenium && pytest -q -m smoke --junitxml=reports/ui/smoke.xml tests/ui || pytest -q -m smoke --junitxml=reports/ui/smoke.xml
+[2025-08-09T12:26:13.290Z] Collecting pytest
+[2025-08-09T12:26:13.290Z]   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+[2025-08-09T12:26:13.540Z] Collecting selenium
+[2025-08-09T12:26:13.540Z]   Downloading selenium-4.34.2-py3-none-any.whl.metadata (7.5 kB)
+[2025-08-09T12:26:13.540Z] Collecting iniconfig>=1 (from pytest)
+[2025-08-09T12:26:13.540Z]   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+[2025-08-09T12:26:13.791Z] Collecting packaging>=20 (from pytest)
+[2025-08-09T12:26:13.791Z]   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+[2025-08-09T12:26:13.791Z] Collecting pluggy<2,>=1.5 (from pytest)
+[2025-08-09T12:26:13.791Z]   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+[2025-08-09T12:26:14.043Z] Collecting pygments>=2.7.2 (from pytest)
+[2025-08-09T12:26:14.043Z]   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+[2025-08-09T12:26:14.043Z] Collecting urllib3~=2.5.0 (from urllib3[socks]~=2.5.0->selenium)
+[2025-08-09T12:26:14.043Z]   Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+[2025-08-09T12:26:14.043Z] Collecting trio~=0.30.0 (from selenium)
+[2025-08-09T12:26:14.293Z]   Downloading trio-0.30.0-py3-none-any.whl.metadata (8.5 kB)
+[2025-08-09T12:26:14.293Z] Collecting trio-websocket~=0.12.2 (from selenium)
+[2025-08-09T12:26:14.293Z]   Downloading trio_websocket-0.12.2-py3-none-any.whl.metadata (5.1 kB)
+[2025-08-09T12:26:14.293Z] Collecting certifi>=2025.6.15 (from selenium)
+[2025-08-09T12:26:14.551Z]   Downloading certifi-2025.8.3-py3-none-any.whl.metadata (2.4 kB)
+[2025-08-09T12:26:14.551Z] Collecting typing_extensions~=4.14.0 (from selenium)
+[2025-08-09T12:26:14.551Z]   Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+[2025-08-09T12:26:14.551Z] Collecting websocket-client~=1.8.0 (from selenium)
+[2025-08-09T12:26:14.551Z]   Downloading websocket_client-1.8.0-py3-none-any.whl.metadata (8.0 kB)
+[2025-08-09T12:26:14.801Z] Collecting attrs>=23.2.0 (from trio~=0.30.0->selenium)
+[2025-08-09T12:26:14.801Z]   Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:26:14.801Z] Collecting sortedcontainers (from trio~=0.30.0->selenium)
+[2025-08-09T12:26:14.801Z]   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:26:14.801Z] Collecting idna (from trio~=0.30.0->selenium)
+[2025-08-09T12:26:15.053Z]   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:26:15.053Z] Collecting outcome (from trio~=0.30.0->selenium)
+[2025-08-09T12:26:15.053Z]   Downloading outcome-1.3.0.post0-py2.py3-none-any.whl.metadata (2.6 kB)
+[2025-08-09T12:26:15.053Z] Collecting sniffio>=1.3.0 (from trio~=0.30.0->selenium)
+[2025-08-09T12:26:15.303Z]   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+[2025-08-09T12:26:15.303Z] Collecting wsproto>=0.14 (from trio-websocket~=0.12.2->selenium)
+[2025-08-09T12:26:15.303Z]   Downloading wsproto-1.2.0-py3-none-any.whl.metadata (5.6 kB)
+[2025-08-09T12:26:15.303Z] Collecting pysocks!=1.5.7,<2.0,>=1.5.6 (from urllib3[socks]~=2.5.0->selenium)
+[2025-08-09T12:26:15.303Z]   Downloading PySocks-1.7.1-py3-none-any.whl.metadata (13 kB)
+[2025-08-09T12:26:15.555Z] Collecting h11<1,>=0.9.0 (from wsproto>=0.14->trio-websocket~=0.12.2->selenium)
+[2025-08-09T12:26:15.555Z]   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+[2025-08-09T12:26:15.555Z] Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+[2025-08-09T12:26:15.809Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.5/365.5 kB 2.4 MB/s eta 0:00:00
+[2025-08-09T12:26:15.809Z] Downloading selenium-4.34.2-py3-none-any.whl (9.4 MB)
+[2025-08-09T12:26:16.360Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.4/9.4 MB 22.2 MB/s eta 0:00:00
+[2025-08-09T12:26:16.360Z] Downloading certifi-2025.8.3-py3-none-any.whl (161 kB)
+[2025-08-09T12:26:16.360Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 161.2/161.2 kB 50.6 MB/s eta 0:00:00
+[2025-08-09T12:26:16.360Z] Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+[2025-08-09T12:26:16.360Z] Downloading packaging-25.0-py3-none-any.whl (66 kB)
+[2025-08-09T12:26:16.360Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 203.8 MB/s eta 0:00:00
+[2025-08-09T12:26:16.360Z] Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+[2025-08-09T12:26:16.617Z] Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+[2025-08-09T12:26:16.617Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 33.2 MB/s eta 0:00:00
+[2025-08-09T12:26:16.617Z] Downloading trio-0.30.0-py3-none-any.whl (499 kB)
+[2025-08-09T12:26:16.617Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 499.2/499.2 kB 47.2 MB/s eta 0:00:00
+[2025-08-09T12:26:16.617Z] Downloading trio_websocket-0.12.2-py3-none-any.whl (21 kB)
+[2025-08-09T12:26:16.617Z] Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+[2025-08-09T12:26:16.617Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 470.3 MB/s eta 0:00:00
+[2025-08-09T12:26:16.868Z] Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+[2025-08-09T12:26:16.868Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.8/129.8 kB 55.9 MB/s eta 0:00:00
+[2025-08-09T12:26:16.868Z] Downloading websocket_client-1.8.0-py3-none-any.whl (58 kB)
+[2025-08-09T12:26:16.868Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.8/58.8 kB 524.1 MB/s eta 0:00:00
+[2025-08-09T12:26:16.868Z] Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+[2025-08-09T12:26:16.868Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 41.0 MB/s eta 0:00:00
+[2025-08-09T12:26:16.868Z] Downloading outcome-1.3.0.post0-py2.py3-none-any.whl (10 kB)
+[2025-08-09T12:26:16.868Z] Downloading PySocks-1.7.1-py3-none-any.whl (16 kB)
+[2025-08-09T12:26:17.119Z] Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+[2025-08-09T12:26:17.119Z] Downloading wsproto-1.2.0-py3-none-any.whl (24 kB)
+[2025-08-09T12:26:17.119Z] Downloading idna-3.10-py3-none-any.whl (70 kB)
+[2025-08-09T12:26:17.119Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 102.9 MB/s eta 0:00:00
+[2025-08-09T12:26:17.119Z] Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+[2025-08-09T12:26:17.119Z] Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+[2025-08-09T12:26:17.379Z] Installing collected packages: sortedcontainers, websocket-client, urllib3, typing_extensions, sniffio, pysocks, pygments, pluggy, packaging, iniconfig, idna, h11, certifi, attrs, wsproto, pytest, outcome, trio, trio-websocket, selenium
+[2025-08-09T12:26:18.291Z] Successfully installed attrs-25.3.0 certifi-2025.8.3 h11-0.16.0 idna-3.10 iniconfig-2.1.0 outcome-1.3.0.post0 packaging-25.0 pluggy-1.6.0 pygments-2.19.2 pysocks-1.7.1 pytest-8.4.1 selenium-4.34.2 sniffio-1.3.1 sortedcontainers-2.4.0 trio-0.30.0 trio-websocket-0.12.2 typing_extensions-4.14.1 urllib3-2.5.0 websocket-client-1.8.0 wsproto-1.2.0
+[2025-08-09T12:26:18.291Z] WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[2025-08-09T12:26:18.542Z] 
+[2025-08-09T12:26:18.542Z] [notice] A new release of pip is available: 24.0 -> 25.2
+[2025-08-09T12:26:18.542Z] [notice] To update, run: pip install --upgrade pip
+[2025-08-09T12:26:32.568Z] ...s                                                                     [100%]
+[2025-08-09T12:26:32.568Z] - generated xml file: /var/jenkins_home/workspace/rpsls-pipeline/reports/ui/smoke.xml -
+[2025-08-09T12:26:32.568Z] 3 passed, 1 skipped, 4 deselected in 12.25s
+Post stage
+[Pipeline] junit
+[2025-08-09T12:26:32.617Z] Recording test results
+[2025-08-09T12:26:32.630Z] [Checks API] No suitable checks publisher found.
+[Pipeline] archiveArtifacts
+[2025-08-09T12:26:32.666Z] Archiving artifacts
+[Pipeline] sh
+[2025-08-09T12:26:32.930Z] + docker rm -f selenium
+[2025-08-09T12:26:33.180Z] + docker network rm rpsls-tests
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push)
+[Pipeline] withCredentials
+[2025-08-09T12:26:33.490Z] Masking supported pattern matches of $DOCKER_PASS
+[Pipeline] {
+[Pipeline] sh
+[2025-08-09T12:26:33.778Z] + docker login -u devopsserdar --password-stdin
+[2025-08-09T12:26:33.778Z] + echo ****
+[2025-08-09T12:26:35.136Z] WARNING! Your password will be stored unencrypted in /var/jenkins_home/.docker/config.json.
+[2025-08-09T12:26:35.136Z] Configure a credential helper to remove this warning. See
+[2025-08-09T12:26:35.136Z] https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+[2025-08-09T12:26:35.136Z] 
+[2025-08-09T12:26:35.136Z] Login Succeeded
+[Pipeline] sh
+[2025-08-09T12:26:35.411Z] + docker push devopsserdar/rpsls:latest
+[2025-08-09T12:26:35.411Z] The push refers to repository [docker.io/devopsserdar/rpsls]
+[2025-08-09T12:26:35.661Z] 84bc8396566b: Preparing
+[2025-08-09T12:26:35.661Z] 2cb505c2cd6d: Preparing
+[2025-08-09T12:26:35.661Z] 9a00321a47a7: Preparing
+[2025-08-09T12:26:35.661Z] 06b5b4ae8808: Preparing
+[2025-08-09T12:26:35.661Z] 63364c383275: Preparing
+[2025-08-09T12:26:35.661Z] d6629ab315fb: Preparing
+[2025-08-09T12:26:35.661Z] 9fa12d818e91: Preparing
+[2025-08-09T12:26:35.661Z] d6629ab315fb: Waiting
+[2025-08-09T12:26:35.661Z] 9fa12d818e91: Waiting
+[2025-08-09T12:26:37.026Z] 06b5b4ae8808: Layer already exists
+[2025-08-09T12:26:37.026Z] 84bc8396566b: Layer already exists
+[2025-08-09T12:26:37.026Z] 63364c383275: Layer already exists
+[2025-08-09T12:26:37.026Z] 2cb505c2cd6d: Layer already exists
+[2025-08-09T12:26:37.026Z] 9a00321a47a7: Layer already exists
+[2025-08-09T12:26:37.588Z] d6629ab315fb: Layer already exists
+[2025-08-09T12:26:37.588Z] 9fa12d818e91: Layer already exists
+[2025-08-09T12:26:42.840Z] latest: digest: sha256:7c00dce1d7aed80ed2e607a4c7fdeb3a119d4984ccd3b2c941078f4e4c8e1d4f size: 1789
+[2025-08-09T12:26:42.840Z] + docker push devopsserdar/rpsls:59
+[2025-08-09T12:26:42.840Z] The push refers to repository [docker.io/devopsserdar/rpsls]
+[2025-08-09T12:26:42.840Z] 84bc8396566b: Preparing
+[2025-08-09T12:26:42.840Z] 2cb505c2cd6d: Preparing
+[2025-08-09T12:26:42.840Z] 9a00321a47a7: Preparing
+[2025-08-09T12:26:42.840Z] 06b5b4ae8808: Preparing
+[2025-08-09T12:26:42.840Z] 63364c383275: Preparing
+[2025-08-09T12:26:42.840Z] d6629ab315fb: Preparing
+[2025-08-09T12:26:42.840Z] 9fa12d818e91: Preparing
+[2025-08-09T12:26:42.840Z] d6629ab315fb: Waiting
+[2025-08-09T12:26:42.840Z] 9fa12d818e91: Waiting
+[2025-08-09T12:26:43.771Z] 06b5b4ae8808: Layer already exists
+[2025-08-09T12:26:43.771Z] 84bc8396566b: Layer already exists
+[2025-08-09T12:26:43.771Z] 9a00321a47a7: Layer already exists
+[2025-08-09T12:26:43.771Z] 2cb505c2cd6d: Layer already exists
+[2025-08-09T12:26:43.771Z] 63364c383275: Layer already exists
+[2025-08-09T12:26:44.712Z] d6629ab315fb: Layer already exists
+[2025-08-09T12:26:44.712Z] 9fa12d818e91: Layer already exists
+[2025-08-09T12:26:46.598Z] 59: digest: sha256:7c00dce1d7aed80ed2e607a4c7fdeb3a119d4984ccd3b2c941078f4e4c8e1d4f size: 1789
+[Pipeline] sh
+[2025-08-09T12:26:46.868Z] + docker push devopsserdar/rpsls-web:latest
+[2025-08-09T12:26:46.868Z] The push refers to repository [docker.io/devopsserdar/rpsls-web]
+[2025-08-09T12:26:47.124Z] 368129e0bc8c: Preparing
+[2025-08-09T12:26:47.124Z] 5f70bf18a086: Preparing
+[2025-08-09T12:26:47.124Z] 2cb505c2cd6d: Preparing
+[2025-08-09T12:26:47.124Z] 9a00321a47a7: Preparing
+[2025-08-09T12:26:47.124Z] 06b5b4ae8808: Preparing
+[2025-08-09T12:26:47.124Z] 63364c383275: Preparing
+[2025-08-09T12:26:47.124Z] d6629ab315fb: Preparing
+[2025-08-09T12:26:47.124Z] 9fa12d818e91: Preparing
+[2025-08-09T12:26:47.124Z] 63364c383275: Waiting
+[2025-08-09T12:26:47.124Z] d6629ab315fb: Waiting
+[2025-08-09T12:26:47.124Z] 9fa12d818e91: Waiting
+[2025-08-09T12:26:48.472Z] 06b5b4ae8808: Layer already exists
+[2025-08-09T12:26:48.472Z] 5f70bf18a086: Layer already exists
+[2025-08-09T12:26:48.472Z] 368129e0bc8c: Layer already exists
+[2025-08-09T12:26:48.472Z] 9a00321a47a7: Layer already exists
+[2025-08-09T12:26:48.472Z] 2cb505c2cd6d: Layer already exists
+[2025-08-09T12:26:49.024Z] d6629ab315fb: Layer already exists
+[2025-08-09T12:26:49.024Z] 63364c383275: Layer already exists
+[2025-08-09T12:26:49.024Z] 9fa12d818e91: Layer already exists
+[2025-08-09T12:26:50.920Z] latest: digest: sha256:a2d7c8ac97c47c763b4b165b8dad623c01df518491dda073db1063236859ff98 size: 1995
+[2025-08-09T12:26:50.920Z] + docker push devopsserdar/rpsls-web:59
+[2025-08-09T12:26:50.920Z] The push refers to repository [docker.io/devopsserdar/rpsls-web]
+[2025-08-09T12:26:51.177Z] 368129e0bc8c: Preparing
+[2025-08-09T12:26:51.177Z] 5f70bf18a086: Preparing
+[2025-08-09T12:26:51.177Z] 2cb505c2cd6d: Preparing
+[2025-08-09T12:26:51.177Z] 9a00321a47a7: Preparing
+[2025-08-09T12:26:51.177Z] 06b5b4ae8808: Preparing
+[2025-08-09T12:26:51.177Z] 63364c383275: Preparing
+[2025-08-09T12:26:51.177Z] d6629ab315fb: Preparing
+[2025-08-09T12:26:51.177Z] 9fa12d818e91: Preparing
+[2025-08-09T12:26:51.177Z] 63364c383275: Waiting
+[2025-08-09T12:26:51.177Z] d6629ab315fb: Waiting
+[2025-08-09T12:26:51.177Z] 9fa12d818e91: Waiting
+[2025-08-09T12:26:52.109Z] 9a00321a47a7: Layer already exists
+[2025-08-09T12:26:52.109Z] 5f70bf18a086: Layer already exists
+[2025-08-09T12:26:52.109Z] 2cb505c2cd6d: Layer already exists
+[2025-08-09T12:26:52.109Z] 06b5b4ae8808: Layer already exists
+[2025-08-09T12:26:52.109Z] 368129e0bc8c: Layer already exists
+[2025-08-09T12:26:52.669Z] d6629ab315fb: Layer already exists
+[2025-08-09T12:26:52.669Z] 63364c383275: Layer already exists
+[2025-08-09T12:26:52.669Z] 9fa12d818e91: Layer already exists
+[2025-08-09T12:26:54.562Z] 59: digest: sha256:a2d7c8ac97c47c763b4b165b8dad623c01df518491dda073db1063236859ff98 size: 1995
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] sh
+[2025-08-09T12:26:54.893Z] + set -e
+[2025-08-09T12:26:54.893Z] + kubectl apply -f -
+[2025-08-09T12:26:54.893Z] + kubectl create namespace rpsls --dry-run=client -o yaml
+[2025-08-09T12:26:54.893Z] namespace/rpsls configured
+[2025-08-09T12:26:54.893Z] + + kubectl apply -f -
+[2025-08-09T12:26:54.893Z] cat
+[2025-08-09T12:26:55.144Z] serviceaccount/rpsls-api unchanged
+[2025-08-09T12:26:55.144Z] role.rbac.authorization.k8s.io/service-reader unchanged
+[2025-08-09T12:26:55.144Z] rolebinding.rbac.authorization.k8s.io/read-services unchanged
+[2025-08-09T12:26:55.144Z] + + cat
+[2025-08-09T12:26:55.144Z] kubectl apply -f -
+[2025-08-09T12:26:55.144Z] deployment.apps/rpsls configured
+[2025-08-09T12:26:55.144Z] service/rpsls configured
+[2025-08-09T12:26:55.144Z] deployment.apps/rpsls-web configured
+[2025-08-09T12:26:55.394Z] service/rpsls-web unchanged
+[2025-08-09T12:26:55.394Z] + kubectl -n rpsls rollout status deploy/rpsls --timeout=120s
+[2025-08-09T12:26:55.394Z] Waiting for deployment "rpsls" rollout to finish: 1 old replicas are pending termination...
+[2025-08-09T12:27:00.643Z] Waiting for deployment "rpsls" rollout to finish: 1 old replicas are pending termination...
+[2025-08-09T12:27:00.643Z] deployment "rpsls" successfully rolled out
+[2025-08-09T12:27:00.643Z] + kubectl -n rpsls rollout status deploy/rpsls-web --timeout=120s
+[2025-08-09T12:27:00.643Z] deployment "rpsls-web" successfully rolled out
+[Pipeline] script
+[Pipeline] {
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (UI Tests (Regression))
+[Pipeline] sh
+[2025-08-09T12:27:01.023Z] + set -e
+[2025-08-09T12:27:01.023Z] + WEB_URL=http://192.168.64.153:30081
+[2025-08-09T12:27:01.023Z] + API_URL=http://192.168.64.153:30080
+[2025-08-09T12:27:01.023Z] + mkdir -p reports/ui
+[2025-08-09T12:27:01.023Z] + docker network create rpsls-tests
+[2025-08-09T12:27:01.023Z] + docker rm -f selenium
+[2025-08-09T12:27:01.023Z] + docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
+[2025-08-09T12:27:01.023Z] ac27aa5ad54a07a2ab3b62583cfe98d4b5f5b6f7152952c21a4d6b22a6ccaada
+[2025-08-09T12:27:01.273Z] + docker run --rm --network rpsls-tests --volumes-from jenkins -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=http://192.168.64.153:30081 -e API_URL=http://192.168.64.153:30080 -w /var/jenkins_home/workspace/rpsls-pipeline python:3.11-slim sh -lc pip install --no-cache-dir pytest selenium && pytest -q -m regression --junitxml=reports/ui/regression.xml tests/ui || pytest -q -m regression --junitxml=reports/ui/regression.xml
+[2025-08-09T12:27:02.188Z] Collecting pytest
+[2025-08-09T12:27:02.438Z]   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+[2025-08-09T12:27:02.438Z] Collecting selenium
+[2025-08-09T12:27:02.688Z]   Downloading selenium-4.34.2-py3-none-any.whl.metadata (7.5 kB)
+[2025-08-09T12:27:02.688Z] Collecting iniconfig>=1 (from pytest)
+[2025-08-09T12:27:02.688Z]   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+[2025-08-09T12:27:02.688Z] Collecting packaging>=20 (from pytest)
+[2025-08-09T12:27:02.688Z]   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+[2025-08-09T12:27:02.944Z] Collecting pluggy<2,>=1.5 (from pytest)
+[2025-08-09T12:27:02.944Z]   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+[2025-08-09T12:27:02.944Z] Collecting pygments>=2.7.2 (from pytest)
+[2025-08-09T12:27:02.944Z]   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+[2025-08-09T12:27:03.195Z] Collecting urllib3~=2.5.0 (from urllib3[socks]~=2.5.0->selenium)
+[2025-08-09T12:27:03.195Z]   Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+[2025-08-09T12:27:03.195Z] Collecting trio~=0.30.0 (from selenium)
+[2025-08-09T12:27:03.195Z]   Downloading trio-0.30.0-py3-none-any.whl.metadata (8.5 kB)
+[2025-08-09T12:27:03.195Z] Collecting trio-websocket~=0.12.2 (from selenium)
+[2025-08-09T12:27:03.445Z]   Downloading trio_websocket-0.12.2-py3-none-any.whl.metadata (5.1 kB)
+[2025-08-09T12:27:03.445Z] Collecting certifi>=2025.6.15 (from selenium)
+[2025-08-09T12:27:03.445Z]   Downloading certifi-2025.8.3-py3-none-any.whl.metadata (2.4 kB)
+[2025-08-09T12:27:03.445Z] Collecting typing_extensions~=4.14.0 (from selenium)
+[2025-08-09T12:27:03.700Z]   Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+[2025-08-09T12:27:03.700Z] Collecting websocket-client~=1.8.0 (from selenium)
+[2025-08-09T12:27:03.700Z]   Downloading websocket_client-1.8.0-py3-none-any.whl.metadata (8.0 kB)
+[2025-08-09T12:27:03.700Z] Collecting attrs>=23.2.0 (from trio~=0.30.0->selenium)
+[2025-08-09T12:27:03.951Z]   Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:27:03.951Z] Collecting sortedcontainers (from trio~=0.30.0->selenium)
+[2025-08-09T12:27:03.951Z]   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:27:03.951Z] Collecting idna (from trio~=0.30.0->selenium)
+[2025-08-09T12:27:03.951Z]   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+[2025-08-09T12:27:04.201Z] Collecting outcome (from trio~=0.30.0->selenium)
+[2025-08-09T12:27:04.201Z]   Downloading outcome-1.3.0.post0-py2.py3-none-any.whl.metadata (2.6 kB)
+[2025-08-09T12:27:04.201Z] Collecting sniffio>=1.3.0 (from trio~=0.30.0->selenium)
+[2025-08-09T12:27:04.201Z]   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+[2025-08-09T12:27:04.201Z] Collecting wsproto>=0.14 (from trio-websocket~=0.12.2->selenium)
+[2025-08-09T12:27:04.452Z]   Downloading wsproto-1.2.0-py3-none-any.whl.metadata (5.6 kB)
+[2025-08-09T12:27:04.452Z] Collecting pysocks!=1.5.7,<2.0,>=1.5.6 (from urllib3[socks]~=2.5.0->selenium)
+[2025-08-09T12:27:04.452Z]   Downloading PySocks-1.7.1-py3-none-any.whl.metadata (13 kB)
+[2025-08-09T12:27:04.702Z] Collecting h11<1,>=0.9.0 (from wsproto>=0.14->trio-websocket~=0.12.2->selenium)
+[2025-08-09T12:27:04.702Z]   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+[2025-08-09T12:27:04.702Z] Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+[2025-08-09T12:27:04.953Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 365.5/365.5 kB 2.5 MB/s eta 0:00:00
+[2025-08-09T12:27:04.953Z] Downloading selenium-4.34.2-py3-none-any.whl (9.4 MB)
+[2025-08-09T12:27:05.506Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.4/9.4 MB 27.2 MB/s eta 0:00:00
+[2025-08-09T12:27:05.506Z] Downloading certifi-2025.8.3-py3-none-any.whl (161 kB)
+[2025-08-09T12:27:05.506Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 161.2/161.2 kB 58.0 MB/s eta 0:00:00
+[2025-08-09T12:27:05.506Z] Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+[2025-08-09T12:27:05.506Z] Downloading packaging-25.0-py3-none-any.whl (66 kB)
+[2025-08-09T12:27:05.506Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.5/66.5 kB 57.5 MB/s eta 0:00:00
+[2025-08-09T12:27:05.506Z] Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+[2025-08-09T12:27:05.506Z] Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+[2025-08-09T12:27:05.506Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 41.8 MB/s eta 0:00:00
+[2025-08-09T12:27:05.756Z] Downloading trio-0.30.0-py3-none-any.whl (499 kB)
+[2025-08-09T12:27:05.756Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 499.2/499.2 kB 51.2 MB/s eta 0:00:00
+[2025-08-09T12:27:05.756Z] Downloading trio_websocket-0.12.2-py3-none-any.whl (21 kB)
+[2025-08-09T12:27:05.756Z] Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+[2025-08-09T12:27:05.756Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 583.8 MB/s eta 0:00:00
+[2025-08-09T12:27:05.756Z] Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+[2025-08-09T12:27:05.756Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.8/129.8 kB 61.0 MB/s eta 0:00:00
+[2025-08-09T12:27:06.008Z] Downloading websocket_client-1.8.0-py3-none-any.whl (58 kB)
+[2025-08-09T12:27:06.008Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 58.8/58.8 kB 646.0 MB/s eta 0:00:00
+[2025-08-09T12:27:06.008Z] Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+[2025-08-09T12:27:06.008Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 138.2 MB/s eta 0:00:00
+[2025-08-09T12:27:06.008Z] Downloading outcome-1.3.0.post0-py2.py3-none-any.whl (10 kB)
+[2025-08-09T12:27:06.008Z] Downloading PySocks-1.7.1-py3-none-any.whl (16 kB)
+[2025-08-09T12:27:06.008Z] Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+[2025-08-09T12:27:06.259Z] Downloading wsproto-1.2.0-py3-none-any.whl (24 kB)
+[2025-08-09T12:27:06.259Z] Downloading idna-3.10-py3-none-any.whl (70 kB)
+[2025-08-09T12:27:06.259Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 439.7 MB/s eta 0:00:00
+[2025-08-09T12:27:06.259Z] Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+[2025-08-09T12:27:06.259Z] Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+[2025-08-09T12:27:06.259Z] Installing collected packages: sortedcontainers, websocket-client, urllib3, typing_extensions, sniffio, pysocks, pygments, pluggy, packaging, iniconfig, idna, h11, certifi, attrs, wsproto, pytest, outcome, trio, trio-websocket, selenium
+[2025-08-09T12:27:07.615Z] Successfully installed attrs-25.3.0 certifi-2025.8.3 h11-0.16.0 idna-3.10 iniconfig-2.1.0 outcome-1.3.0.post0 packaging-25.0 pluggy-1.6.0 pygments-2.19.2 pysocks-1.7.1 pytest-8.4.1 selenium-4.34.2 sniffio-1.3.1 sortedcontainers-2.4.0 trio-0.30.0 trio-websocket-0.12.2 typing_extensions-4.14.1 urllib3-2.5.0 websocket-client-1.8.0 wsproto-1.2.0
+[2025-08-09T12:27:07.615Z] WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+[2025-08-09T12:27:07.615Z] 
+[2025-08-09T12:27:07.615Z] [notice] A new release of pip is available: 24.0 -> 25.2
+[2025-08-09T12:27:07.615Z] [notice] To update, run: pip install --upgrade pip
+[2025-08-09T12:27:10.284Z] ...                                                                      [100%]
+[2025-08-09T12:27:10.284Z] - generated xml file: /var/jenkins_home/workspace/rpsls-pipeline/reports/ui/regression.xml -
+[2025-08-09T12:27:10.284Z] 3 passed, 5 deselected in 2.35s
+Post stage
+[Pipeline] junit
+[2025-08-09T12:27:10.556Z] Recording test results
+[2025-08-09T12:27:10.571Z] [Checks API] No suitable checks publisher found.
+[Pipeline] archiveArtifacts
+[2025-08-09T12:27:10.593Z] Archiving artifacts
+[Pipeline] sh
+[2025-08-09T12:27:10.859Z] + docker rm -f selenium
+[2025-08-09T12:27:11.112Z] + docker network rm rpsls-tests
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
