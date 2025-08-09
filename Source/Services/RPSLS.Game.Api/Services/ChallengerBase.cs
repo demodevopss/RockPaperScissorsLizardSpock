@@ -22,13 +22,12 @@ namespace RPSLS.Game.Api.Services
 
         public async Task<PickDto> Pick(IDictionary<string, string> context, bool isTwitterUser, string userName)
         {
-            var client = _httpClientFactory.CreateClient("Challenger");
-            client.BaseAddress = _url;
-            PropagateContext(client, context);
-            var response = await client.GetAsync((isTwitterUser) ? $"/pick?username={userName}" : "/pick");
-            var result = await response.Content.ReadAsStringAsync();
-            var jsonOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-            return JsonSerializer.Deserialize<PickDto>(result, jsonOptions);
+            // Mock implementation for demo - return random pick
+            var random = new Random();
+            var picks = new[] { 0, 1, 2, 3, 4 }; // Rock, Paper, Scissors, Lizard, Spock
+            var randomPick = picks[random.Next(picks.Length)];
+            
+            return new PickDto { Value = randomPick };
         }
 
         private void PropagateContext(HttpClient client, IDictionary<string, string> context)
