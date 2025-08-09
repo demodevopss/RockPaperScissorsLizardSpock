@@ -26,10 +26,32 @@ pipeline {
     }
     stage('UI Tests') {
       steps {
-        sh 'docker compose -f docker-compose.tests.yml up --abort-on-container-exit --exit-code-from tests | cat'
+        sh '''
+set -e
+if docker compose version >/dev/null 2>&1; then
+  DCMD="docker compose"
+elif command -v docker-compose >/dev/null 2>&1; then
+  DCMD="docker-compose"
+else
+  DCMD="docker run --rm -v \"$PWD\":\"$PWD\" -w \"$PWD\" -v /var/run/docker.sock:/var/run/docker.sock docker/compose:1.29.2"
+fi
+$DCMD -f docker-compose.tests.yml up --abort-on-container-exit --exit-code-from tests | cat
+'''
       }
       post {
-        always { sh 'docker compose -f docker-compose.tests.yml down -v || true' }
+        always {
+          sh '''
+set +e
+if docker compose version >/dev/null 2>&1; then
+  DCMD="docker compose"
+elif command -v docker-compose >/dev/null 2>&1; then
+  DCMD="docker-compose"
+else
+  DCMD="docker run --rm -v \"$PWD\":\"$PWD\" -w \"$PWD\" -v /var/run/docker.sock:/var/run/docker.sock docker/compose:1.29.2"
+fi
+$DCMD -f docker-compose.tests.yml down -v || true
+'''
+        }
       }
     }
     stage('Push') {
