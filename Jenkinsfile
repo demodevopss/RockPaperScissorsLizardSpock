@@ -60,9 +60,42 @@ docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g s
       steps {
         sh '''
 set -e
-kubectl create namespace rpsls --dry-run=client -o yaml | kubectl apply -f - || true
+            kubectl create namespace rpsls --dry-run=client -o yaml | kubectl apply -f - || true
 
-cat <<YAML | kubectl apply -f -
+            # Create RBAC for API
+            cat <<YAML | kubectl apply -f -
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: rpsls-api
+  namespace: rpsls
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: rpsls
+  name: service-reader
+rules:
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-services
+  namespace: rpsls
+subjects:
+- kind: ServiceAccount
+  name: rpsls-api
+  namespace: rpsls
+roleRef:
+  kind: Role
+  name: service-reader
+  apiGroup: rbac.authorization.k8s.io
+YAML
+
+            cat <<YAML | kubectl apply -f -
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -78,6 +111,7 @@ spec:
       labels:
         app: rpsls
     spec:
+      serviceAccountName: rpsls-api
       containers:
       - name: rpsls
         image: "$IMAGE:$BUILD_NUMBER"
