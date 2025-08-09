@@ -99,6 +99,9 @@ spec:
     port: 80
     targetPort: 8080
     nodePort: 30080
+  - name: grpc
+    port: 8081
+    targetPort: 8081
 ---
 apiVersion: apps/v1
 kind: Deployment
