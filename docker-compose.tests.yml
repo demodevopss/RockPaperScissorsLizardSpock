@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  selenium:
+    image: selenium/standalone-chrome:121.0
+    shm_size: 2gb
+    environment:
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    ports:
+      - "4444:4444"
+
+  tests:
+    image: python:3.11-slim
+    depends_on:
+      - selenium
+    working_dir: /work
+    volumes:
+      - .:/work:ro
+    environment:
+      - SELENIUM_URL=http://selenium:4444/wd/hub
+      - WEB_URL=http://192.168.64.153:30081
+      - API_URL=http://192.168.64.153:30080
+    command: >
+      sh -lc "pip install --no-cache-dir pytest selenium && pytest -q tests/ui"
+

@@ -24,6 +24,14 @@ pipeline {
         sh 'trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL $IMAGE:latest || trivy image --no-progress --ignorefile .trivyignore --exit-code 1 --severity CRITICAL $IMAGE:$BUILD_NUMBER'
       }
     }
+    stage('UI Tests') {
+      steps {
+        sh 'docker compose -f docker-compose.tests.yml up --abort-on-container-exit --exit-code-from tests | cat'
+      }
+      post {
+        always { sh 'docker compose -f docker-compose.tests.yml down -v || true' }
+      }
+    }
     stage('Push') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
