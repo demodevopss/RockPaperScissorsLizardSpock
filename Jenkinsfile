@@ -121,7 +121,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: GameManager__Url
-          value: "http://rpsls.rpsls.svc.cluster.local:8080"
+          value: "http://rpsls.rpsls.svc.cluster.local"
         - name: GameManager__Grpc__GrpcOverHttp
           value: "true"
         ports:
