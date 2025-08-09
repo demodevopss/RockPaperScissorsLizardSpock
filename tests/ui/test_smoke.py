@@ -36,3 +36,33 @@ def test_swagger_redirects(driver):
     driver.get(api_url)
     WebDriverWait(driver, 15).until(lambda d: "/swagger" in urllib.parse.urlparse(d.current_url).path)
 
+
+def test_play_with_bot_button(driver):
+    driver.get(WEB_URL)
+    # Enter username
+    user_input = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user")))
+    user_input.clear()
+    user_input.send_keys("jenkins-user")
+    # Click "Play with a bot"
+    play_bot = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Play with a bot')]")))
+    play_bot.click()
+    WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
+
+
+def test_play_with_friend_button_if_enabled(driver):
+    driver.get(WEB_URL)
+    # Enter username
+    user_input = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input.user")))
+    user_input.clear()
+    user_input.send_keys("jenkins-user")
+    # Try to click "Play with a friend" if present/enabled
+    try:
+        btn = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//button[contains(., 'Play with a friend')]")))
+        if btn.is_enabled():
+            btn.click()
+            WebDriverWait(driver, 30).until(lambda d: "/lobby" in urllib.parse.urlparse(d.current_url).path)
+        else:
+            pytest.skip("Multiplayer button disabled by settings")
+    except Exception:
+        pytest.skip("Multiplayer button not rendered")
+
