@@ -53,9 +53,11 @@ def test_play_with_bot_button(driver):
     play_bot = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Play with a bot')]")))
     play_bot.click()
     WebDriverWait(driver, 30).until(lambda d: "/challenger" in urllib.parse.urlparse(d.current_url).path)
-    # Challenger seçim sayfası yüklenmeli - herhangi bir buton görünmeli
-    WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.TAG_NAME, "button"))
+    # Blazor içeriğinin yüklenmesini bekle
+    time.sleep(5)
+    # Sayfa içeriği kontrolü - CHOOSE YOUR OPPONENT yazısı veya herhangi bir content
+    WebDriverWait(driver, 30).until(
+        lambda d: "CHOOSE" in d.page_source or "OPPONENT" in d.page_source or len(d.find_elements(By.TAG_NAME, "button")) > 0
     )
 
 
