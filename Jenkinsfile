@@ -33,8 +33,8 @@ API_URL=${API_URL:-http://192.168.64.153:30080}
 mkdir -p reports/ui
 docker network create rpsls-tests >/dev/null 2>&1 || true
 docker rm -f selenium >/dev/null 2>&1 || true
-docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chromium:121.0 || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
-docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":"$PWD" -w "$PWD" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m smoke --junitxml=reports/ui/smoke.xml tests/ui" | cat
+docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
+docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":/work -w /work python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m smoke --junitxml=reports/ui/smoke.xml tests/ui || pytest -q -m smoke --junitxml=reports/ui/smoke.xml" | cat
 '''
       }
       post {
@@ -46,28 +46,7 @@ docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hu
       }
     }
 
-    stage('UI Tests (Regression)') {
-      when { expression { return env.DEPLOYED?.trim() == 'true' } }
-      steps {
-        sh '''
-set -e
-WEB_URL=${WEB_URL:-http://192.168.64.153:30081}
-API_URL=${API_URL:-http://192.168.64.153:30080}
-mkdir -p reports/ui
-docker network create rpsls-tests >/dev/null 2>&1 || true
-docker rm -f selenium >/dev/null 2>&1 || true
-docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chromium:121.0 || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest
-docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":"$PWD" -w "$PWD" python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m regression --junitxml=reports/ui/regression.xml tests/ui" | cat
-'''
-      }
-      post {
-        always {
-          junit allowEmptyResults: true, testResults: 'reports/ui/regression.xml'
-          archiveArtifacts artifacts: 'reports/ui/regression.xml', allowEmptyArchive: true
-          sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true'
-        }
-      }
-    }
+    
     stage('Push') {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -168,6 +147,28 @@ kubectl -n rpsls rollout status deploy/rpsls --timeout=120s || true
 kubectl -n rpsls rollout status deploy/rpsls-web --timeout=120s || true
 '''
         script { env.DEPLOYED = 'true' }
+      }
+    }
+
+    stage('UI Tests (Regression)') {
+      steps {
+        sh '''
+set -e
+WEB_URL=${WEB_URL:-http://192.168.64.153:30081}
+API_URL=${API_URL:-http://192.168.64.153:30080}
+mkdir -p reports/ui
+docker network create rpsls-tests >/dev/null 2>&1 || true
+docker rm -f selenium >/dev/null 2>&1 || true
+docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g seleniarm/standalone-chromium:latest || docker run -d --name selenium --network rpsls-tests -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
+docker run --rm --network rpsls-tests -e SELENIUM_URL=http://selenium:4444/wd/hub -e WEB_URL=$WEB_URL -e API_URL=$API_URL -v "$PWD":/work -w /work python:3.11-slim sh -lc "pip install --no-cache-dir pytest selenium && pytest -q -m regression --junitxml=reports/ui/regression.xml tests/ui || pytest -q -m regression --junitxml=reports/ui/regression.xml" | cat
+'''
+      }
+      post {
+        always {
+          junit allowEmptyResults: true, testResults: 'reports/ui/regression.xml'
+          archiveArtifacts artifacts: 'reports/ui/regression.xml', allowEmptyArchive: true
+          sh 'docker rm -f selenium >/dev/null 2>&1 || true; docker network rm rpsls-tests >/dev/null 2>&1 || true'
+        }
       }
     }
   }
