@@ -27,7 +27,7 @@ docker build -t ${DOCKER_REGISTRY}/rpsls:latest -f devops/docker/Dockerfile .
       steps {
         sh '''
 echo "🔨 Building RPSLS Web..."
-docker build -t ${DOCKER_REGISTRY}/rpsls-web:latest -f Source/Services/RPSLS.Game/Server/Dockerfile Source/Services/RPSLS.Game/
+docker build -t ${DOCKER_REGISTRY}/rpsls-web:latest -f Source/Services/RPSLS.Game/Server/Dockerfile Source/Services/
 '''
       }
     }
