@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using RPSLS.Game.Api.Services;
 using GameApi.Proto;
+using System;
 
 namespace RPSLS.Tests.Unit.Api
 {

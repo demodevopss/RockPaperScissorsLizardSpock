@@ -1,9 +1,12 @@
 using NUnit.Framework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Http;
 using Moq;
 using RPSLS.Game.Api.Services;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace RPSLS.Tests.Unit.Api
 {
