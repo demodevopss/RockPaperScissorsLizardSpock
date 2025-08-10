@@ -42,20 +42,23 @@ mkdir -p reports/unit
 if [ -f "tests/unit/RPSLS.Tests.Unit.csproj" ]; then
   echo "✅ Found unit tests project"
   
-  # Install .NET if not available
+  # Check for .NET
   if ! command -v dotnet &> /dev/null; then
-    echo "Installing .NET SDK..."
-    wget -qO- https://dot.net/v1/dotnet-install.sh | bash -s -- --channel 5.0
-    export PATH="$PATH:$HOME/.dotnet"
+    echo "⚠️ .NET SDK not found - using Docker container for tests"
+    # Run tests in .NET container
+    docker run --rm -v "$WORKSPACE":/workspace -w /workspace mcr.microsoft.com/dotnet/sdk:5.0-focal \\
+      dotnet test tests/unit/RPSLS.Tests.Unit.csproj \\
+      --logger "trx;LogFileName=unit-tests.trx" \\
+      --results-directory reports/unit/ \\
+      --verbosity normal || echo "Some unit tests failed"
+  else
+    echo "✅ Found .NET SDK"
+    dotnet test tests/unit/RPSLS.Tests.Unit.csproj \\
+      --logger "trx;LogFileName=unit-tests.trx" \\
+      --results-directory reports/unit/ \\
+      --verbosity normal || echo "Some unit tests failed"
   fi
   
-  # Run unit tests
-  echo "🧪 Executing NUnit tests..."
-  dotnet test tests/unit/RPSLS.Tests.Unit.csproj \\
-    --logger "trx;LogFileName=unit-tests.trx" \\
-    --results-directory reports/unit/ \\
-    --verbosity normal || echo "Some unit tests failed"
-    
   echo "📊 Unit test results archived"
 else
   echo "❌ Unit tests project not found, creating placeholder..."
