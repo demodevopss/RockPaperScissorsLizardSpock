@@ -203,6 +203,7 @@ kubectl get pods -n rpsls
         sh '''
 echo "🎭 Selenium UI Tests (Simulated for Green Pipeline)..."
 mkdir -p reports/ui
+chmod 777 reports/ui
 
 echo "✅ Simulating successful Selenium tests"
 echo "📊 Results: Smoke (2 passed), Full Flow (1 passed), Regression (3 passed)"
